@@ -27,6 +27,7 @@ setup(name="agx.generator.dexterity",
       install_requires=[
           'setuptools',
           ##code-section dependencies
+          'agx.generator.gs',
           ##/code-section dependencies
       ],
       extras_require = dict(
