@@ -1,0 +1,12 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:agx="http://namespaces.zope.org/agx">
+
+  <include package="agx.generator.gs" />
+  
+  <utility
+    name="agx.generator.dexterity.profilelocation"
+	provides="agx.core.interfaces.IProfileLocation"
+	component=".profiles.ProfileLocation"
+  />
+
+</configure>
