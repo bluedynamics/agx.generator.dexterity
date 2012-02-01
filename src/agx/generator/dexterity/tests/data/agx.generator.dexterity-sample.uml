@@ -1,2 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_vbqH8Ey3EeGV5f8-MtNCTQ" name="model"/>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dexterity="http:///schemas/dexterity/_HVNkwEy9EeGV5f8-MtNCTQ/0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:gs="http:///schemas/gs/_0BLikEysEeGV5f8-MtNCTQ/1" xmlns:pyegg="http:///schemas/pyegg/_m3LEwPJqEeC2FJWWHfGcuA/17" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http:///schemas/dexterity/_HVNkwEy9EeGV5f8-MtNCTQ/0 ../../profiles/dexterity.profile.uml#_HVOL0Uy9EeGV5f8-MtNCTQ http:///schemas/gs/_0BLikEysEeGV5f8-MtNCTQ/1 ../../../../../../../agx.generator.gs/src/agx/generator/gs/profiles/gs.profile.uml#_0BMJoEysEeGV5f8-MtNCTQ http:///schemas/pyegg/_m3LEwPJqEeC2FJWWHfGcuA/17 ../../../../../../../agx.generator.pyegg/src/agx/generator/pyegg/profiles/pyegg.profile.uml#_m3OIEPJqEeC2FJWWHfGcuA">
+  <uml:Model xmi:id="_vbqH8Ey3EeGV5f8-MtNCTQ" name="model">
+    <packagedElement xmi:type="uml:Package" xmi:id="_SE9PgEy-EeGV5f8-MtNCTQ" name="agx.testpackage">
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_Y7ohgEzAEeGV5f8-MtNCTQ" name="" supplier="_Lo-1IEy_EeGV5f8-MtNCTQ" client="_s9jNIEy_EeGV5f8-MtNCTQ"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_s9jNIEy_EeGV5f8-MtNCTQ" name="ArbeitsgruppeView" clientDependency="_Y7ohgEzAEeGV5f8-MtNCTQ"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_mJ0PgEy_EeGV5f8-MtNCTQ" name="Ort"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_USPxAEy_EeGV5f8-MtNCTQ" name="Audio" clientDependency="_N_Kz8EzAEeGV5f8-MtNCTQ"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_PPgP4Ey_EeGV5f8-MtNCTQ" name="Anschrift" clientDependency="_SQ8yMEzAEeGV5f8-MtNCTQ _VrbVAEzAEeGV5f8-MtNCTQ"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_Lo-1IEy_EeGV5f8-MtNCTQ" name="Arbeitsgruppe">
+        <generalization xmi:id="_fNwm4EzAEeGV5f8-MtNCTQ" general="_AdAr8Ey_EeGV5f8-MtNCTQ"/>
+        <ownedAttribute xmi:id="_372b0EzBEeGEJKn_uFZFVw" name="file" type="_3RmsUEy-EeGV5f8-MtNCTQ" aggregation="composite" association="_378icEzBEeGEJKn_uFZFVw">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_372b0UzBEeGEJKn_uFZFVw" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_372b0kzBEeGEJKn_uFZFVw"/>
+        </ownedAttribute>
+        <nestedClassifier xmi:type="uml:Class" xmi:id="_3RmsUEy-EeGV5f8-MtNCTQ" name="File"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_CvY-QEy_EeGV5f8-MtNCTQ" name="Person"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_AdAr8Ey_EeGV5f8-MtNCTQ" name="Abteilung">
+        <ownedAttribute xmi:id="_PqXfkEzCEeGEJKn_uFZFVw" name="abteilung" type="_AdAr8Ey_EeGV5f8-MtNCTQ" aggregation="composite" association="_Pqai4EzCEeGEJKn_uFZFVw">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_PqXfkUzCEeGEJKn_uFZFVw" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_PqXfkkzCEeGEJKn_uFZFVw"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_N_Kz8EzAEeGV5f8-MtNCTQ" name="" supplier="_3RmsUEy-EeGV5f8-MtNCTQ" client="_USPxAEy_EeGV5f8-MtNCTQ"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_SQ8yMEzAEeGV5f8-MtNCTQ" name="" supplier="_CvY-QEy_EeGV5f8-MtNCTQ" client="_PPgP4Ey_EeGV5f8-MtNCTQ"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_VrbVAEzAEeGV5f8-MtNCTQ" name="" supplier="_mJ0PgEy_EeGV5f8-MtNCTQ" client="_PPgP4Ey_EeGV5f8-MtNCTQ"/>
+      <packagedElement xmi:type="uml:Association" xmi:id="_378icEzBEeGEJKn_uFZFVw" name="" memberEnd="_378icUzBEeGEJKn_uFZFVw _372b0EzBEeGEJKn_uFZFVw">
+        <ownedEnd xmi:id="_378icUzBEeGEJKn_uFZFVw" name="arbeitsgruppe" type="_Lo-1IEy_EeGV5f8-MtNCTQ" association="_378icEzBEeGEJKn_uFZFVw">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_378ickzBEeGEJKn_uFZFVw" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_378ic0zBEeGEJKn_uFZFVw" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_Pqai4EzCEeGEJKn_uFZFVw" name="" memberEnd="_Pqai4UzCEeGEJKn_uFZFVw _PqXfkEzCEeGEJKn_uFZFVw">
+        <ownedEnd xmi:id="_Pqai4UzCEeGEJKn_uFZFVw" name="abteilung" type="_AdAr8Ey_EeGV5f8-MtNCTQ" association="_Pqai4EzCEeGEJKn_uFZFVw">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Pqai4kzCEeGEJKn_uFZFVw" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Pqai40zCEeGEJKn_uFZFVw" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:id="_5zkvQEy9EeGV5f8-MtNCTQ">
+      <eAnnotations xmi:id="_51NuAEy9EeGV5f8-MtNCTQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../../../../../../../agx.generator.pyegg/src/agx/generator/pyegg/profiles/pyegg.profile.uml#_m3OIEPJqEeC2FJWWHfGcuA"/>
+      </eAnnotations>
+      <appliedProfile href="../../../../../../../agx.generator.pyegg/src/agx/generator/pyegg/profiles/pyegg.profile.uml#_HHBJsNqqEd6cif0axL0c4w"/>
+    </profileApplication>
+    <profileApplication xmi:id="_-SUygEy9EeGV5f8-MtNCTQ">
+      <eAnnotations xmi:id="_-UeuoEy9EeGV5f8-MtNCTQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../../../../../../../agx.generator.zca/src/agx/generator/zca/profiles/zca.profile.uml#_oeYDMEyrEeGV5f8-MtNCTQ"/>
+      </eAnnotations>
+      <appliedProfile href="../../../../../../../agx.generator.zca/src/agx/generator/zca/profiles/zca.profile.uml#_gTeSUL-VEeCXSLIizrgdww"/>
+    </profileApplication>
+    <profileApplication xmi:id="_CxwyQEy-EeGV5f8-MtNCTQ">
+      <eAnnotations xmi:id="_C0L0IEy-EeGV5f8-MtNCTQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../../../../../../../agx.generator.gs/src/agx/generator/gs/profiles/gs.profile.uml#_0BMJoEysEeGV5f8-MtNCTQ"/>
+      </eAnnotations>
+      <appliedProfile href="../../../../../../../agx.generator.gs/src/agx/generator/gs/profiles/gs.profile.uml#__CiAUUwhEeGTE4gBrh7aXw"/>
+    </profileApplication>
+    <profileApplication xmi:id="_NSQVgEy-EeGV5f8-MtNCTQ">
+      <eAnnotations xmi:id="_NT9lsEy-EeGV5f8-MtNCTQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../../profiles/dexterity.profile.uml#_HVOL0Uy9EeGV5f8-MtNCTQ"/>
+      </eAnnotations>
+      <appliedProfile href="../../profiles/dexterity.profile.uml#_IXXe8Ey1EeGV5f8-MtNCTQ"/>
+    </profileApplication>
+  </uml:Model>
+  <pyegg:pyegg xmi:id="_j4F58Ey-EeGV5f8-MtNCTQ" base_Package="_SE9PgEy-EeGV5f8-MtNCTQ"/>
+  <gs:profile xmi:id="_j4Pq8Ey-EeGV5f8-MtNCTQ" base_Package="_SE9PgEy-EeGV5f8-MtNCTQ"/>
+  <pyegg:stub xmi:id="_8RnpkEy-EeGV5f8-MtNCTQ" base_Class="_3RmsUEy-EeGV5f8-MtNCTQ"/>
+  <dexterity:behavior xmi:id="_2POM0Ey_EeGV5f8-MtNCTQ" base_Class="_USPxAEy_EeGV5f8-MtNCTQ"/>
+  <gs:content_type xmi:id="_5ZwPIEy_EeGV5f8-MtNCTQ" base_Class="_CvY-QEy_EeGV5f8-MtNCTQ"/>
+  <dexterity:xml xmi:id="_5aCjAEy_EeGV5f8-MtNCTQ" base_Class="_CvY-QEy_EeGV5f8-MtNCTQ"/>
+  <gs:content_type xmi:id="_9iHysEy_EeGV5f8-MtNCTQ" base_Class="_AdAr8Ey_EeGV5f8-MtNCTQ"/>
+  <dexterity:python xmi:id="_9ibUsEy_EeGV5f8-MtNCTQ" base_Class="_AdAr8Ey_EeGV5f8-MtNCTQ"/>
+  <gs:content_type xmi:id="_ArCEYEzAEeGV5f8-MtNCTQ" base_Class="_mJ0PgEy_EeGV5f8-MtNCTQ"/>
+  <dexterity:python xmi:id="_Ar8qYEzAEeGV5f8-MtNCTQ" base_Class="_mJ0PgEy_EeGV5f8-MtNCTQ"/>
+  <dexterity:behavior xmi:id="_D1CiQEzAEeGV5f8-MtNCTQ" base_Class="_PPgP4Ey_EeGV5f8-MtNCTQ"/>
+  <gs:dynamic_view xmi:id="_IcQlAEzAEeGV5f8-MtNCTQ" base_Class="_s9jNIEy_EeGV5f8-MtNCTQ"/>
+</xmi:XMI>

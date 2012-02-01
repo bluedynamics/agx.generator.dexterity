@@ -1,2 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Profile xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_IXXe8Ey1EeGV5f8-MtNCTQ" name="profile"/>
+<uml:Profile xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_IXXe8Ey1EeGV5f8-MtNCTQ" name="dexterity" metaclassReference="_Xd2RsEy8EeGV5f8-MtNCTQ">
+  <eAnnotations xmi:id="_HVOL0Ey9EeGV5f8-MtNCTQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <contents xmi:type="ecore:EPackage" xmi:id="_HVOL0Uy9EeGV5f8-MtNCTQ" name="dexterity" nsURI="http:///schemas/dexterity/_HVNkwEy9EeGV5f8-MtNCTQ/0" nsPrefix="dexterity">
+      <eAnnotations xmi:id="_HVOy4ky9EeGV5f8-MtNCTQ" source="PapyrusVersion">
+        <details xmi:id="_HVOy40y9EeGV5f8-MtNCTQ" key="Version" value="0.0.1"/>
+        <details xmi:id="_HVOy5Ey9EeGV5f8-MtNCTQ" key="Comment" value=""/>
+        <details xmi:id="_HVOy5Uy9EeGV5f8-MtNCTQ" key="Copyright" value=""/>
+        <details xmi:id="_HVOy5ky9EeGV5f8-MtNCTQ" key="Date" value="2012-02-01"/>
+        <details xmi:id="_HVOy50y9EeGV5f8-MtNCTQ" key="Author" value=""/>
+      </eAnnotations>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_HVOL0ky9EeGV5f8-MtNCTQ" name="python">
+        <eAnnotations xmi:id="_HVOL00y9EeGV5f8-MtNCTQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_r-hgcEy8EeGV5f8-MtNCTQ"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_HVOL1Ey9EeGV5f8-MtNCTQ" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_HVOL1ky9EeGV5f8-MtNCTQ" name="xml">
+        <eAnnotations xmi:id="_HVOL10y9EeGV5f8-MtNCTQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_tkn7kEy8EeGV5f8-MtNCTQ"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_HVOL2Ey9EeGV5f8-MtNCTQ" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_HVOL2ky9EeGV5f8-MtNCTQ" name="behavior">
+        <eAnnotations xmi:id="_HVOL20y9EeGV5f8-MtNCTQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_uqYCsEy8EeGV5f8-MtNCTQ"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_HVOL3Ey9EeGV5f8-MtNCTQ" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+    </contents>
+  </eAnnotations>
+  <elementImport xmi:id="_Xd2RsEy8EeGV5f8-MtNCTQ" alias="Class">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_r-hgcEy8EeGV5f8-MtNCTQ" name="python">
+    <ownedAttribute xmi:id="_CHYN8Ey9EeGV5f8-MtNCTQ" name="base_Class" association="_CHYN8Uy9EeGV5f8-MtNCTQ">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_tkn7kEy8EeGV5f8-MtNCTQ" name="xml">
+    <ownedAttribute xmi:id="_C3bK0Ey9EeGV5f8-MtNCTQ" name="base_Class" association="_C3bx4Ey9EeGV5f8-MtNCTQ">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_uqYCsEy8EeGV5f8-MtNCTQ" name="behavior">
+    <ownedAttribute xmi:id="_DrS3wEy9EeGV5f8-MtNCTQ" name="base_Class" association="_DrTe0Ey9EeGV5f8-MtNCTQ">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_CHYN8Uy9EeGV5f8-MtNCTQ" name="E_python_Class0" memberEnd="_CHY1AEy9EeGV5f8-MtNCTQ _CHYN8Ey9EeGV5f8-MtNCTQ">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_CHY1AEy9EeGV5f8-MtNCTQ" name="extension_python" type="_r-hgcEy8EeGV5f8-MtNCTQ" aggregation="composite" association="_CHYN8Uy9EeGV5f8-MtNCTQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_C3bx4Ey9EeGV5f8-MtNCTQ" name="E_xml_Class0" memberEnd="_C3bx4Uy9EeGV5f8-MtNCTQ _C3bK0Ey9EeGV5f8-MtNCTQ">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_C3bx4Uy9EeGV5f8-MtNCTQ" name="extension_xml" type="_tkn7kEy8EeGV5f8-MtNCTQ" aggregation="composite" association="_C3bx4Ey9EeGV5f8-MtNCTQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_DrTe0Ey9EeGV5f8-MtNCTQ" name="E_behavior_Class0" memberEnd="_DrTe0Uy9EeGV5f8-MtNCTQ _DrS3wEy9EeGV5f8-MtNCTQ">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_DrTe0Uy9EeGV5f8-MtNCTQ" name="extension_behavior" type="_uqYCsEy8EeGV5f8-MtNCTQ" aggregation="composite" association="_DrTe0Ey9EeGV5f8-MtNCTQ"/>
+  </packagedElement>
+</uml:Profile>
