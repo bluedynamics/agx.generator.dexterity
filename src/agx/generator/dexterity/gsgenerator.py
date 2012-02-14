@@ -8,6 +8,16 @@ from agx.generator.pyegg.utils import (
 )
 
 
+def type_id(source, target):
+    # calculate type id
+    class_ = read_target_node(source, target)
+    if source.parent.stereotype('pyegg:pymodule'):
+        name = '%s.%s' % (class_base_name(class_), class_.classname.lower())
+    else:
+        name = class_base_name(class_)
+    return name
+
+
 @handler('gsprofiletypes', 'uml2fs', 'connectorgenerator',
          'contenttype', order=100)
 def gsprofiletypes(self, source, target):
@@ -33,12 +43,7 @@ def gsprofiletypes(self, source, target):
         types.params['portalTypes'] = list()
     
     # calculate type name
-    class_ = read_target_node(source, target.target)
-    if source.parent.stereotype('pyegg:pymodule'):
-        full_name = '%s.%s' % (class_base_name(class_),
-                               class_.classname.lower())
-    else:
-        full_name = class_base_name(class_)
+    full_name = type_id(source, target.target)
     
     # add portal type to types.xml
     types.params['portalTypes'].append({
@@ -80,6 +85,7 @@ def gsprofiletypes(self, source, target):
     type.params['ctype']['allowed_content_types'] = list()
     
     # dexterity specific
+    class_ = read_target_node(source, target.target)
     schema = '%s.I%s' % (class_base_name(class_), class_.classname)
     
     # XXX: check whether container or leaf
@@ -148,14 +154,7 @@ def gsdynamicview(self, source, target):
     content_type = source.supplier
     package = read_target_node(egg_source(content_type), target.target)
     default = package['profiles']['default']
-    
-    class_ = read_target_node(content_type, target.target)
-    if source.supplier.parent.stereotype('pyegg:pymodule'):
-        full_name = '%s.%s' % (class_base_name(class_),
-                               class_.classname.lower())
-    else:
-        full_name = class_base_name(class_)
-    
+    full_name = type_id(content_type, target.target)
     name = '%s.xml' % full_name
     type_xml = default['types'][name]
     type_xml.params['ctype']['view_methods'].append(source.client.name)
