@@ -32,15 +32,23 @@ def gsprofiletypes(self, source, target):
         types.template = 'agx.generator.plone:templates/types.xml'
         types.params['portalTypes'] = list()
     
+    # calculate type name
+    class_ = read_target_node(source, target.target)
+    if source.parent.stereotype('pyegg:pymodule'):
+        full_name = '%s.%s' % (class_base_name(class_),
+                               class_.classname.lower())
+    else:
+        full_name = class_base_name(class_)
+    
     # add portal type to types.xml
     types.params['portalTypes'].append({
-        'name': source.name,
-        'meta_type': source.name,
+        'name': full_name,
+        'meta_type': 'Dexterity FTI',
     })
     
     # add TYPENAME.xml to types folder
     # read or create TYPENAME.xml
-    name = '%s.xml' % source.name
+    name = '%s.xml' % full_name
     if name in default['types']:
         type = default['types'][name]
     else:
@@ -52,9 +60,6 @@ def gsprofiletypes(self, source, target):
     # set template params
     # FTI properties can be added by prefixing param key with 'fti:'
     # XXX: calculate from model
-    
-    class_ = read_target_node(source, target.target)
-    full_name = '%s.%s' % (class_base_name(class_), class_.classname.lower())
     
     content_icon = '++resource++%s/%s_icon.png' % (egg.name, source.name)
     
@@ -75,8 +80,13 @@ def gsprofiletypes(self, source, target):
     type.params['ctype']['allowed_content_types'] = list()
     
     # dexterity specific
-    type.params['ctype']['schema'] = 'collective.soundcloud.types.alias.IAlias'
-    type.params['ctype']['klass'] = 'plone.dexterity.content.Item'
+    schema = '%s.I%s' % (class_base_name(class_), class_.classname)
+    
+    # XXX: check whether container or leaf
+    klass = 'plone.dexterity.content.Item'
+    
+    type.params['ctype']['schema'] = schema
+    type.params['ctype']['klass'] = klass
     type.params['ctype']['add_permission'] = 'cmf.AddPortalContent'
     type.params['ctype']['behaviors'] = list()
     
@@ -134,9 +144,18 @@ def gsdynamicview(self, source, target):
     if not source.supplier.stereotype('plone:content_type') \
       or not source.client.stereotype('plone:dynamic_view'):
         return
+    
     content_type = source.supplier
     package = read_target_node(egg_source(content_type), target.target)
     default = package['profiles']['default']
-    name = '%s.xml' % content_type.name
+    
+    class_ = read_target_node(content_type, target.target)
+    if source.supplier.parent.stereotype('pyegg:pymodule'):
+        full_name = '%s.%s' % (class_base_name(class_),
+                               class_.classname.lower())
+    else:
+        full_name = class_base_name(class_)
+    
+    name = '%s.xml' % full_name
     type_xml = default['types'][name]
     type_xml.params['ctype']['view_methods'].append(source.client.name)
