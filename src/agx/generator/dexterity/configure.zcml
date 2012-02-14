@@ -1,7 +1,7 @@
 <configure xmlns="http://namespaces.zope.org/zope"
            xmlns:agx="http://namespaces.zope.org/agx">
 
-  <include package="agx.generator.gs" />
+  <include package="agx.generator.plone" />
   
   <utility
     name="agx.generator.dexterity.profilelocation"

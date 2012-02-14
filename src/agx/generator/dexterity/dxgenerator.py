@@ -9,7 +9,7 @@ from agx.generator.pyegg.utils import (
 
 
 @handler('gsprofiletypes', 'uml2fs', 'connectorgenerator',
-         'gscontenttype', order=100)
+         'contenttype', order=100)
 def gsprofiletypes(self, source, target):
     """Create or extend types.xml and corresponding TYPENAME.xml.
     """
@@ -29,7 +29,7 @@ def gsprofiletypes(self, source, target):
     
     # set template and params if not done yet
     if not types.template:
-        types.template = 'agx.generator.gs:templates/types.xml'
+        types.template = 'agx.generator.plone:templates/types.xml'
         types.params['portalTypes'] = list()
     
     # add portal type to types.xml
@@ -47,7 +47,7 @@ def gsprofiletypes(self, source, target):
         type = default['types'][name] = DTMLTemplate()
     
     # set template used for TYPENAME.xml
-    type.template = 'agx.generator.gs:templates/type.xml'
+    type.template = 'agx.generator.plone:templates/type.xml'
     
     # set template params
     # FTI properties can be added by prefixing param key with 'fti:'
@@ -127,12 +127,12 @@ def gsprofiletypes(self, source, target):
 
 
 @handler('gsdynamicview', 'uml2fs', 'semanticsgenerator',
-         'gsdependency', order=100)
+         'dependency', order=100)
 def gsdynamicview(self, source, target):
     """Add view method to FTI's of all dependent content types.
     """
-    if not source.supplier.stereotype('gs:content_type') \
-      or not source.client.stereotype('gs:dynamic_view'):
+    if not source.supplier.stereotype('plone:content_type') \
+      or not source.client.stereotype('plone:dynamic_view'):
         return
     content_type = source.supplier
     package = read_target_node(egg_source(content_type), target.target)

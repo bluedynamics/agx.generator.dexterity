@@ -25,16 +25,16 @@ Setup configuration and emulate main routine.
     >>> zcaprofilepath = \
     ...     pkg_resources.resource_filename('agx.generator.zca', subpath)
     
-    >>> subpath = 'profiles/gs.profile.uml'
-    >>> gsprofilepath = \
-    ...     pkg_resources.resource_filename('agx.generator.gs', subpath)
+    >>> subpath = 'profiles/plone.profile.uml'
+    >>> ploneprofilepath = \
+    ...     pkg_resources.resource_filename('agx.generator.plone', subpath)
     
     >>> subpath = 'profiles/dexterity.profile.uml'
     >>> dexterityprofilepath = \
     ...     pkg_resources.resource_filename('agx.generator.dexterity', subpath)
     
     >>> modelpaths = [modelpath, eggprofilepath, zcaprofilepath,
-    ...     gsprofilepath, dexterityprofilepath]
+    ...     ploneprofilepath, dexterityprofilepath]
     
     >>> outdir = os.path.join(datadir, 'agx.generator.dexterity-sample')
     >>> controller = agx.core.Controller()
