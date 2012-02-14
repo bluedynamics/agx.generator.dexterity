@@ -86,22 +86,22 @@
               </children>
               <children xmi:type="notation:Shape" xmi:id="_dM4gwFJREeGZSeytnTlRxw" type="3012" fontName="Ubuntu" fontHeight="10" lineColor="0">
                 <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_gaivkFJREeGZSeytnTlRxw" source="Stereotype_Annotation">
-                  <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_p3QhoFJREeGZSeytnTlRxw" key="StereotypeWithQualifiedNameList" value=""/>
-                  <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_p3QhoVJREeGZSeytnTlRxw" key="StereotypeList" value="dexterity::TextLine"/>
-                  <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_p3QholJREeGZSeytnTlRxw" key="Stereotype_Presentation_Kind" value="HorizontalStereo"/>
-                  <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_p3Qho1JREeGZSeytnTlRxw" key="PropStereoDisplay" value=""/>
-                  <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_p3QhpFJREeGZSeytnTlRxw" key="StereotypePropertyLocation" value="Compartment"/>
+                  <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_rHYVoFdHEeGNG5unf8Szeg" key="StereotypeWithQualifiedNameList" value=""/>
+                  <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_rHYVoVdHEeGNG5unf8Szeg" key="StereotypeList" value="dexterity::TextLine"/>
+                  <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_rHYVoldHEeGNG5unf8Szeg" key="Stereotype_Presentation_Kind" value="HorizontalStereo"/>
+                  <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_rHYVo1dHEeGNG5unf8Szeg" key="PropStereoDisplay" value=""/>
+                  <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_rHYVpFdHEeGNG5unf8Szeg" key="StereotypePropertyLocation" value="Compartment"/>
                 </eAnnotations>
                 <element xmi:type="uml:Property" href="agx.generator.dexterity-sample.uml#_dM0PUFJREeGZSeytnTlRxw"/>
                 <layoutConstraint xmi:type="notation:Location" xmi:id="_dM4gwVJREeGZSeytnTlRxw"/>
               </children>
               <children xmi:type="notation:Shape" xmi:id="_enmLQFJREeGZSeytnTlRxw" type="3012" fontName="Ubuntu" fontHeight="10" lineColor="0">
                 <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_i9GL4FJREeGZSeytnTlRxw" source="Stereotype_Annotation">
-                  <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_wK5p8FJREeGZSeytnTlRxw" key="StereotypeWithQualifiedNameList" value=""/>
-                  <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_wK5p8VJREeGZSeytnTlRxw" key="StereotypeList" value="dexterity::Int"/>
-                  <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_wK5p8lJREeGZSeytnTlRxw" key="Stereotype_Presentation_Kind" value="HorizontalStereo"/>
-                  <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_wK5p81JREeGZSeytnTlRxw" key="PropStereoDisplay" value=""/>
-                  <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_wK5p9FJREeGZSeytnTlRxw" key="StereotypePropertyLocation" value="Compartment"/>
+                  <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_trfRIFdHEeGNG5unf8Szeg" key="StereotypeWithQualifiedNameList" value=""/>
+                  <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_trf4MFdHEeGNG5unf8Szeg" key="StereotypeList" value="dexterity::Int"/>
+                  <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_trf4MVdHEeGNG5unf8Szeg" key="Stereotype_Presentation_Kind" value="HorizontalStereo"/>
+                  <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_trf4MldHEeGNG5unf8Szeg" key="PropStereoDisplay" value=""/>
+                  <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_trf4M1dHEeGNG5unf8Szeg" key="StereotypePropertyLocation" value="Compartment"/>
                 </eAnnotations>
                 <element xmi:type="uml:Property" href="agx.generator.dexterity-sample.uml#_enh50FJREeGZSeytnTlRxw"/>
                 <layoutConstraint xmi:type="notation:Location" xmi:id="_enmLQVJREeGZSeytnTlRxw"/>

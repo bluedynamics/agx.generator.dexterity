@@ -52,9 +52,9 @@
     </profileApplication>
   </uml:Model>
   <pyegg:pyegg xmi:id="_j4F58Ey-EeGV5f8-MtNCTQ" base_Package="_SE9PgEy-EeGV5f8-MtNCTQ"/>
-  <dexterity:TextLine xmi:id="_Uptl0FJREeGZSeytnTlRxw" base_Property="_NSmOUFJREeGZSeytnTlRxw" title="First Name" description="First name of person"/>
-  <dexterity:TextLine xmi:id="_gaY-kFJREeGZSeytnTlRxw" base_Property="_dM0PUFJREeGZSeytnTlRxw" title="Last Name" description="Last Name of Person"/>
-  <dexterity:Int xmi:id="_i9AFQFJREeGZSeytnTlRxw" base_Property="_enh50FJREeGZSeytnTlRxw" title="Age" description="Age of Person"/>
+  <dexterity:TextLine xmi:id="_Uptl0FJREeGZSeytnTlRxw" base_Property="_NSmOUFJREeGZSeytnTlRxw" title="'First Name'" description="'First name of person'"/>
+  <dexterity:TextLine xmi:id="_gaY-kFJREeGZSeytnTlRxw" base_Property="_dM0PUFJREeGZSeytnTlRxw" title="'Last Name'" description="'Last Name of Person'"/>
+  <dexterity:Int xmi:id="_i9AFQFJREeGZSeytnTlRxw" base_Property="_enh50FJREeGZSeytnTlRxw" title="'Age'" description="'Age of Person'"/>
   <dexterity:python xmi:id="_yvGsEFJREeGZSeytnTlRxw" base_Class="_Jm2VUFJREeGZSeytnTlRxw"/>
   <pyegg:pypackage xmi:id="_wpEhwFJTEeGZSeytnTlRxw" base_Package="_Ha7QUFJREeGZSeytnTlRxw"/>
   <plone:gsprofile xmi:id="_-gUVUFb8EeG7eej248Qh-Q" base_Package="_SE9PgEy-EeGV5f8-MtNCTQ"/>
