@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dexterity="http:///schemas/dexterity/_ZdMRAFJTEeGZSeytnTlRxw/5" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:plone="http:///schemas/plone/_ZIy6sFb7EeG7eej248Qh-Q/2" xmlns:pyegg="http:///schemas/pyegg/_m3LEwPJqEeC2FJWWHfGcuA/17" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http:///schemas/dexterity/_ZdMRAFJTEeGZSeytnTlRxw/5 ../../profiles/dexterity.profile.uml#_ZdOGMFJTEeGZSeytnTlRxw http:///schemas/plone/_ZIy6sFb7EeG7eej248Qh-Q/2 ../../../../../../../agx.generator.plone/src/agx/generator/plone/profiles/plone.profile.uml#_ZI0I0Fb7EeG7eej248Qh-Q http:///schemas/pyegg/_m3LEwPJqEeC2FJWWHfGcuA/17 ../../../../../../../agx.generator.pyegg/src/agx/generator/pyegg/profiles/pyegg.profile.uml#_m3OIEPJqEeC2FJWWHfGcuA">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dexterity="http:///schemas/dexterity/_ZdMRAFJTEeGZSeytnTlRxw/5" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:plone="http:///schemas/plone/_EVKKQFfYEeGNzK3rlQPxVA/7" xmlns:pyegg="http:///schemas/pyegg/_m3LEwPJqEeC2FJWWHfGcuA/17" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http:///schemas/dexterity/_ZdMRAFJTEeGZSeytnTlRxw/5 ../../profiles/dexterity.profile.uml#_ZdOGMFJTEeGZSeytnTlRxw http:///schemas/plone/_EVKKQFfYEeGNzK3rlQPxVA/7 ../../../../../../../agx.generator.plone/src/agx/generator/plone/profiles/plone.profile.uml#_EVKxUFfYEeGNzK3rlQPxVA http:///schemas/pyegg/_m3LEwPJqEeC2FJWWHfGcuA/17 ../../../../../../../agx.generator.pyegg/src/agx/generator/pyegg/profiles/pyegg.profile.uml#_m3OIEPJqEeC2FJWWHfGcuA">
   <uml:Model xmi:id="_vbqH8Ey3EeGV5f8-MtNCTQ" name="model">
     <packagedElement xmi:type="uml:Package" xmi:id="_SE9PgEy-EeGV5f8-MtNCTQ" name="agx.testpackage">
       <packagedElement xmi:type="uml:Package" xmi:id="_Ha7QUFJREeGZSeytnTlRxw" name="content">
@@ -24,6 +24,8 @@
             </defaultValue>
           </ownedAttribute>
         </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_MrJcoFgLEeGNG5unf8Szeg" name="CustomView" clientDependency="_TGPQwFgLEeGNG5unf8Szeg"/>
+        <packagedElement xmi:type="uml:Dependency" xmi:id="_TGPQwFgLEeGNG5unf8Szeg" name="" supplier="_Jm2VUFJREeGZSeytnTlRxw" client="_MrJcoFgLEeGNG5unf8Szeg"/>
       </packagedElement>
     </packagedElement>
     <profileApplication xmi:id="_5zkvQEy9EeGV5f8-MtNCTQ">
@@ -46,7 +48,7 @@
     </profileApplication>
     <profileApplication xmi:id="_8qrCUFb8EeG7eej248Qh-Q">
       <eAnnotations xmi:id="_8ruLMFb8EeG7eej248Qh-Q" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="../../../../../../../agx.generator.plone/src/agx/generator/plone/profiles/plone.profile.uml#_ZI0I0Fb7EeG7eej248Qh-Q"/>
+        <references xmi:type="ecore:EPackage" href="../../../../../../../agx.generator.plone/src/agx/generator/plone/profiles/plone.profile.uml#_EVKxUFfYEeGNzK3rlQPxVA"/>
       </eAnnotations>
       <appliedProfile href="../../../../../../../agx.generator.plone/src/agx/generator/plone/profiles/plone.profile.uml#__CiAUUwhEeGTE4gBrh7aXw"/>
     </profileApplication>
@@ -59,4 +61,5 @@
   <pyegg:pypackage xmi:id="_wpEhwFJTEeGZSeytnTlRxw" base_Package="_Ha7QUFJREeGZSeytnTlRxw"/>
   <plone:gsprofile xmi:id="_-gUVUFb8EeG7eej248Qh-Q" base_Package="_SE9PgEy-EeGV5f8-MtNCTQ"/>
   <plone:content_type xmi:id="_EHLQIFb9EeG7eej248Qh-Q" base_Class="_Jm2VUFJREeGZSeytnTlRxw"/>
+  <plone:dynamic_view xmi:id="_QcMFUFgLEeGNG5unf8Szeg" base_Class="_MrJcoFgLEeGNG5unf8Szeg"/>
 </xmi:XMI>

@@ -251,7 +251,7 @@ def schemaumlclass(self, source, target):
     class_ = read_target_node(source, target.target)
     if class_.stereotype('plone:content_type'):
         class_.__name__ = 'I%s' % class_.name
-    alsoProvides(class_, IDexterityType)
+        alsoProvides(class_, IDexterityType)
 
 
 @handler('schemaclass', 'uml2fs', 'zcagenerator', 'contenttype', order=110)
