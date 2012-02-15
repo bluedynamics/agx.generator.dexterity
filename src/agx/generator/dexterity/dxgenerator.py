@@ -150,6 +150,8 @@ def transform_attribute(source, target, group, fetch_tgv):
     fetch_tgv(tgv, attribute, field_def['stereotype'])
     imp = Imports(attribute.parent.parent)
     imp.set(field_def['import_from'], [[field_def['import'], None]])
+    if field_def['depends']:
+        pass # XXX write to setup.py setup_dependencies
 
 
 @handler('dxcollection', 'uml2fs', 'zcagenerator', 'dxcollection', order=100)
