@@ -66,7 +66,8 @@ def gsprofiletypes(self, source, target):
     # FTI properties can be added by prefixing param key with 'fti:'
     # XXX: calculate from model
     
-    content_icon = '++resource++%s/%s_icon.png' % (egg.name, source.name)
+    content_icon = '++resource++%s/%s_icon.png' % (
+        egg.name, source.name[1:].lower())
     
     type.params['ctype'] = dict()
     
@@ -76,8 +77,8 @@ def gsprofiletypes(self, source, target):
     type.params['ctype']['i18n_domain'] = egg.name
     
     # basic metadata
-    type.params['ctype']['title'] = source.name
-    type.params['ctype']['description'] = source.name
+    type.params['ctype']['title'] = source.name[1:]
+    type.params['ctype']['description'] = source.name[1:]
     type.params['ctype']['content_icon'] = content_icon
     type.params['ctype']['allow_discussion'] = 'False'
     type.params['ctype']['global_allow'] = 'True'
@@ -86,7 +87,7 @@ def gsprofiletypes(self, source, target):
     
     # dexterity specific
     class_ = read_target_node(source, target.target)
-    schema = '%s.I%s' % (class_base_name(class_), class_.classname)
+    schema = '%s.%s' % (class_base_name(class_), class_.classname)
     
     # XXX: check whether container or leaf
     klass = 'plone.dexterity.content.Item'

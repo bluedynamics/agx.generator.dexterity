@@ -1,10 +1,12 @@
 import uuid
+from zope.interface import alsoProvides
 from node.ext import python
 from node.ext.python.utils import Imports
 from node.ext.uml.utils import (
     TaggedValues,
     UNSET,
 )
+from node.ext.uml.interfaces import IClass
 from node.ext.directory import Directory
 from node.ext.zcml import (
     ZCMLFile,
@@ -15,9 +17,24 @@ from agx.core import (
     token,
 )
 from agx.core.util import read_target_node
-from agx.generator.pyegg.utils import sort_classes_in_module
+from agx.generator.pyegg.treesync import ModuleNameChooser
+from agx.generator.pyegg.utils import (
+    set_copyright,
+    sort_classes_in_module,
+)
 from agx.generator.zca.utils import zcml_include_package
 from agx.generator.dexterity.schema import mapping
+
+
+class IDexterityType(IClass):
+    """Marker.
+    """
+
+
+class DexterityModuleNameChooser(ModuleNameChooser):
+    
+    def __call__(self):
+        return self.context.name[1:].lower()
 
 
 def read_tgv(tgv, attribute, stereotype, attrs):
@@ -175,7 +192,7 @@ def typeview(self, source, target):
     schema = read_target_node(source, target.target)
     module = schema.parent
     
-    classname = '%sView' % schema.classname
+    classname = '%sView' % schema.classname[1:]
     if module.classes(classname):
         view = module.classes(classname)[0]
     else:
@@ -198,10 +215,10 @@ def typeview(self, source, target):
         directory['configure.zcml'] = ZCMLFile(nsmap=snmap)
     zcml = directory['configure.zcml']
     
-    iface = '.%s.I%s' % (module.modulename, schema.classname)
-    viewclass = '.%s.%s' % (module.modulename, schema.classname)
+    iface = '.%s.%s' % (module.modulename, schema.classname)
+    viewclass = '.%s.%s' % (module.modulename, schema.classname[1:])
     
-    template = 'templates/%s.pt' % schema.classname.lower()
+    template = 'templates/%s.pt' % schema.classname[1:].lower()
     if not 'templates' in directory:
         directory['templates'] = Directory()
     
@@ -229,22 +246,23 @@ def typeview(self, source, target):
         zcml_include_package(directory)
 
 
+@handler('schemaumlclass', 'xmi2uml', 'finalizegenerator', 'class')
+def schemaumlclass(self, source, target):
+    class_ = read_target_node(source, target.target)
+    if class_.stereotype('plone:content_type'):
+        class_.__name__ = 'I%s' % class_.name
+    alsoProvides(class_, IDexterityType)
+
+
 @handler('schemaclass', 'uml2fs', 'zcagenerator', 'contenttype', order=110)
 def schemaclass(self, source, target):
     schema = read_target_node(source, target.target)
     module = schema.parent
     
-    classname = 'I%s' % schema.classname
-    if module.classes(classname):
-        # XXX: no complete class replace
-        old = module.classes(classname)[0]
-        del module[old.name]
-    
-    view = module.classes('%sView' % schema.classname)[0]
+    view = module.classes('%sView' % schema.classname[1:])[0]
     tok = token(str(view.uuid), True, depends_on=set())
     tok.depends_on.add(schema)
     
-    schema.classname = 'I%s' % schema.classname
     if not 'form.Schema' in schema.bases:
         schema.bases.append('form.Schema')
     

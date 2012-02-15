@@ -3,6 +3,11 @@
 
   <include package="agx.generator.plone" />
   
+  <adapter
+    for="agx.generator.dexterity.dxgenerator.IDexterityType"
+    factory="agx.generator.dexterity.dxgenerator.DexterityModuleNameChooser"
+  />
+  
   <utility
     name="agx.generator.dexterity.profilelocation"
 	provides="agx.core.interfaces.IProfileLocation"
