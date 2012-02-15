@@ -10,8 +10,12 @@ from node.ext.zcml import (
     ZCMLFile,
     SimpleDirective,
 )
-from agx.core import handler
+from agx.core import (
+    handler,
+    token,
+)
 from agx.core.util import read_target_node
+from agx.generator.pyegg.utils import sort_classes_in_module
 from agx.generator.zca.utils import zcml_include_package
 from agx.generator.dexterity.schema import mapping
 
@@ -170,12 +174,21 @@ def dxobject(self, source, target):
 def typeview(self, source, target):
     schema = read_target_node(source, target.target)
     module = schema.parent
-    view = python.Class()
-    module[uuid.uuid4()] = view
-    view.classname = '%sView' % schema.classname
-    view.bases.append('BrowserPage')
+    
+    classname = '%sView' % schema.classname
+    if module.classes(classname):
+        view = module.classes(classname)[0]
+    else:
+        view = python.Class()
+        module[uuid.uuid4()] = view
+    view.classname = classname
+    
+    if not 'BrowserPage' in view.bases:
+        view.bases.append('BrowserPage')
+    
     imp = Imports(module)
     imp.set('Products.Five', [['BrowserPage', None]])
+    
     directory = module.parent
     if not 'configure.zcml' in directory:
         snmap = {
@@ -184,11 +197,14 @@ def typeview(self, source, target):
         }
         directory['configure.zcml'] = ZCMLFile(nsmap=snmap)
     zcml = directory['configure.zcml']
+    
     iface = '.%s.I%s' % (module.modulename, schema.classname)
     viewclass = '.%s.%s' % (module.modulename, schema.classname)
+    
     template = 'templates/%s.pt' % schema.classname.lower()
     if not 'templates' in directory:
         directory['templates'] = Directory()
+    
     directives = zcml.filter(tag='browser:page', attr='name', value='view')
     exists = None
     if directives:
@@ -201,12 +217,14 @@ def typeview(self, source, target):
         directive = SimpleDirective(name='browser:page', parent = zcml)
     else:
         directive = exists
+    
     directive.attrs['name'] = 'view'
     directive.attrs['for'] = iface
     directive.attrs['class'] = viewclass
     directive.attrs['template'] = template
     directive.attrs['permission'] = 'zope2.View'
     # XXX: directive.attrs['layer'] = 'foo'
+    
     if not source.parent.stereotype('pyegg:pyegg'):
         zcml_include_package(directory)
 
@@ -214,7 +232,29 @@ def typeview(self, source, target):
 @handler('schemaclass', 'uml2fs', 'zcagenerator', 'contenttype', order=110)
 def schemaclass(self, source, target):
     schema = read_target_node(source, target.target)
+    module = schema.parent
+    
+    classname = 'I%s' % schema.classname
+    if module.classes(classname):
+        # XXX: no complete class replace
+        old = module.classes(classname)[0]
+        del module[old.name]
+    
+    view = module.classes('%sView' % schema.classname)[0]
+    tok = token(str(view.uuid), True, depends_on=set())
+    tok.depends_on.add(schema)
+    
     schema.classname = 'I%s' % schema.classname
-    schema.bases.append('form.Schema')
+    if not 'form.Schema' in schema.bases:
+        schema.bases.append('form.Schema')
+    
     imp = Imports(schema.parent)
     imp.set('plone.directives', [['form', None]])
+
+
+@handler('typemodulesorter', 'uml2fs', 'zcasemanticsgenerator', 
+         'contenttype', order=100)
+def dependencysorter(self, source, target):
+    schema = read_target_node(source, target.target)
+    module = schema.parent
+    sort_classes_in_module(module)
