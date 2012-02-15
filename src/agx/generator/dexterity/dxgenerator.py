@@ -1,9 +1,18 @@
+import uuid
+from node.ext import python
+from node.ext.python.utils import Imports
 from node.ext.uml.utils import (
     TaggedValues,
     UNSET,
 )
+from node.ext.directory import Directory
+from node.ext.zcml import (
+    ZCMLFile,
+    SimpleDirective,
+)
 from agx.core import handler
 from agx.core.util import read_target_node
+from agx.generator.zca.utils import zcml_include_package
 from agx.generator.dexterity.schema import mapping
 
 
@@ -118,8 +127,8 @@ def transform_attribute(source, target, group, fetch_tgv):
     attribute.value = field_def['factory']
     tgv = TaggedValues(source)
     fetch_tgv(tgv, attribute, field_def['stereotype'])
-    # XXX not works
-    #attribute.postlf = 5
+    imp = Imports(attribute.parent.parent)
+    imp.set(field_def['import_from'], [[field_def['import'], None]])
 
 
 @handler('dxcollection', 'uml2fs', 'zcagenerator', 'dxcollection', order=100)
@@ -155,3 +164,57 @@ def dxminmax(self, source, target):
 @handler('dxobject', 'uml2fs', 'zcagenerator', 'dxobject', order=100)
 def dxobject(self, source, target):
     transform_attribute(source, target, 'object', object_tgv)
+
+
+@handler('typeview', 'uml2fs', 'zcagenerator', 'contenttype', order=100)
+def typeview(self, source, target):
+    schema = read_target_node(source, target.target)
+    module = schema.parent
+    view = python.Class()
+    module[uuid.uuid4()] = view
+    view.classname = '%sView' % schema.classname
+    view.bases.append('BrowserPage')
+    imp = Imports(module)
+    imp.set('Products.Five', [['BrowserPage', None]])
+    directory = module.parent
+    if not 'configure.zcml' in directory:
+        snmap = {
+            None: 'http://namespaces.zope.org/zope',
+            'browser': 'http://namespaces.zope.org/browser',
+        }
+        directory['configure.zcml'] = ZCMLFile(nsmap=snmap)
+    zcml = directory['configure.zcml']
+    iface = '.%s.I%s' % (module.modulename, schema.classname)
+    viewclass = '.%s.%s' % (module.modulename, schema.classname)
+    template = 'templates/%s.pt' % schema.classname.lower()
+    if not 'templates' in directory:
+        directory['templates'] = Directory()
+    directives = zcml.filter(tag='browser:page', attr='name', value='view')
+    exists = None
+    if directives:
+        for directive in directives:
+            if directive.attrs['class'] == viewclass \
+              and directive.attrs['for'] == iface:
+                exists = directive
+                break
+    if not exists:
+        directive = SimpleDirective(name='browser:page', parent = zcml)
+    else:
+        directive = exists
+    directive.attrs['name'] = 'view'
+    directive.attrs['for'] = iface
+    directive.attrs['class'] = viewclass
+    directive.attrs['template'] = template
+    directive.attrs['permission'] = 'zope2.View'
+    # XXX: directive.attrs['layer'] = 'foo'
+    if not source.parent.stereotype('pyegg:pyegg'):
+        zcml_include_package(directory)
+
+
+@handler('schemaclass', 'uml2fs', 'zcagenerator', 'contenttype', order=110)
+def schemaclass(self, source, target):
+    schema = read_target_node(source, target.target)
+    schema.classname = 'I%s' % schema.classname
+    schema.bases.append('form.Schema')
+    imp = Imports(schema.parent)
+    imp.set('plone.directives', [['form', None]])
