@@ -8,6 +8,7 @@ from node.ext.uml.utils import (
 )
 from node.ext.uml.interfaces import IClass
 from node.ext.directory import Directory
+from node.ext.template import XMLTemplate
 from node.ext.zcml import (
     ZCMLFile,
     SimpleDirective,
@@ -202,50 +203,54 @@ def typeview(self, source, target):
         module[uuid.uuid4()] = view
     view.classname = classname
     
-    if not 'BrowserPage' in view.bases:
-        view.bases.append('BrowserPage')
+    if not 'dexterity.DisplayForm' in view.bases:
+        view.bases.append('dexterity.DisplayForm')
+    
+    context = "grok.context(%s)" % schema.classname
+    require = "grok.require('zope2.View')"
+    template = "grok.template('templates/%s')" % schema.classname[1:].lower()
+    
+    context_exists = False
+    require_exists = False
+    template_exists = False
+    
+    for block in view.blocks():
+        for line in block.lines:
+            if line == context:
+                context_exists = True
+            if line == require:
+                require_exists = True
+            if line == template:
+                template_exists = True
+    
+    block = python.Block()
+    block.__name__ = str(uuid.uuid4())
+    if not context_exists:
+        block.lines.append(context)
+    if not require_exists:
+        block.lines.append(require)
+    if not template_exists:
+        block.lines.append(template)
+    
+    if block.lines:
+        view.insertfirst(block)
     
     imp = Imports(module)
-    imp.set('Products.Five', [['BrowserPage', None]])
+    imp.set('plone.directives', [['dexterity', None]])
+    imp.set('five', [['grok', None]])
     
     directory = module.parent
-    if not 'configure.zcml' in directory:
-        snmap = {
-            None: 'http://namespaces.zope.org/zope',
-            'browser': 'http://namespaces.zope.org/browser',
-        }
-        directory['configure.zcml'] = ZCMLFile(nsmap=snmap)
-    zcml = directory['configure.zcml']
-    
-    iface = '.%s.%s' % (module.modulename, schema.classname)
-    viewclass = '.%s.%s' % (module.modulename, schema.classname[1:])
-    
-    template = 'templates/%s.pt' % schema.classname[1:].lower()
+    template_name = '%s.pt' % schema.classname[1:].lower()
+    template = 'templates/%s' % template_name
     if not 'templates' in directory:
         directory['templates'] = Directory()
     
-    directives = zcml.filter(tag='browser:page', attr='name', value='view')
-    exists = None
-    if directives:
-        for directive in directives:
-            if directive.attrs['class'] == viewclass \
-              and directive.attrs['for'] == iface:
-                exists = directive
-                break
-    if not exists:
-        directive = SimpleDirective(name='browser:page', parent = zcml)
-    else:
-        directive = exists
+    templates = directory['templates']
+    templates.factories['.pt'] = XMLTemplate
     
-    directive.attrs['name'] = 'view'
-    directive.attrs['for'] = iface
-    directive.attrs['class'] = viewclass
-    directive.attrs['template'] = template
-    directive.attrs['permission'] = 'zope2.View'
-    # XXX: directive.attrs['layer'] = 'foo'
-    
-    if not source.parent.stereotype('pyegg:pyegg'):
-        zcml_include_package(directory)
+    if template_name not in templates:
+        pt = templates[template_name] = XMLTemplate()
+        pt.template = 'agx.generator.dexterity:templates/displayform.pt'
 
 
 @handler('schemaumlclass', 'xmi2uml', 'finalizegenerator', 'class')
