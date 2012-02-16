@@ -26,6 +26,10 @@
         </packagedElement>
         <packagedElement xmi:type="uml:Class" xmi:id="_MrJcoFgLEeGNG5unf8Szeg" name="CustomView" clientDependency="_TGPQwFgLEeGNG5unf8Szeg"/>
         <packagedElement xmi:type="uml:Dependency" xmi:id="_TGPQwFgLEeGNG5unf8Szeg" name="" supplier="_Jm2VUFJREeGZSeytnTlRxw" client="_MrJcoFgLEeGNG5unf8Szeg"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_JS96cFi8EeG4Z-w98Q2zpg" name="SomeBehavior" clientDependency="_SNgMgFi8EeG4Z-w98Q2zpg _oEqtEFi8EeG4Z-w98Q2zpg"/>
+        <packagedElement xmi:type="uml:Dependency" xmi:id="_SNgMgFi8EeG4Z-w98Q2zpg" name="" supplier="_Jm2VUFJREeGZSeytnTlRxw" client="_JS96cFi8EeG4Z-w98Q2zpg"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_hWlrgFi8EeG4Z-w98Q2zpg" name="Company"/>
+        <packagedElement xmi:type="uml:Dependency" xmi:id="_oEqtEFi8EeG4Z-w98Q2zpg" name="" supplier="_hWlrgFi8EeG4Z-w98Q2zpg" client="_JS96cFi8EeG4Z-w98Q2zpg"/>
       </packagedElement>
     </packagedElement>
     <profileApplication xmi:id="_5zkvQEy9EeGV5f8-MtNCTQ">
@@ -57,9 +61,11 @@
   <dexterity:TextLine xmi:id="_Uptl0FJREeGZSeytnTlRxw" base_Property="_NSmOUFJREeGZSeytnTlRxw" title="'First Name'" description="'First name of person'"/>
   <dexterity:TextLine xmi:id="_gaY-kFJREeGZSeytnTlRxw" base_Property="_dM0PUFJREeGZSeytnTlRxw" title="'Last Name'" description="'Last Name of Person'"/>
   <dexterity:Int xmi:id="_i9AFQFJREeGZSeytnTlRxw" base_Property="_enh50FJREeGZSeytnTlRxw" title="'Age'" description="'Age of Person'"/>
-  <dexterity:python xmi:id="_yvGsEFJREeGZSeytnTlRxw" base_Class="_Jm2VUFJREeGZSeytnTlRxw"/>
   <pyegg:pypackage xmi:id="_wpEhwFJTEeGZSeytnTlRxw" base_Package="_Ha7QUFJREeGZSeytnTlRxw"/>
   <plone:gsprofile xmi:id="_-gUVUFb8EeG7eej248Qh-Q" base_Package="_SE9PgEy-EeGV5f8-MtNCTQ"/>
   <plone:content_type xmi:id="_EHLQIFb9EeG7eej248Qh-Q" base_Class="_Jm2VUFJREeGZSeytnTlRxw"/>
   <plone:dynamic_view xmi:id="_QcMFUFgLEeGNG5unf8Szeg" base_Class="_MrJcoFgLEeGNG5unf8Szeg"/>
+  <dexterity:python xmi:id="_BNoLAFi8EeG4Z-w98Q2zpg" base_Class="_Jm2VUFJREeGZSeytnTlRxw"/>
+  <dexterity:behavior xmi:id="_XHxHEFi8EeG4Z-w98Q2zpg" base_Class="_JS96cFi8EeG4Z-w98Q2zpg"/>
+  <plone:content_type xmi:id="_kZ0zAFi8EeG4Z-w98Q2zpg" base_Class="_hWlrgFi8EeG4Z-w98Q2zpg"/>
 </xmi:XMI>
