@@ -146,8 +146,26 @@ def gsprofiletypes(self, source, target):
 @handler('gscomposition', 'uml2fs', 'zcasemanticsgenerator',
          'association', order=100)
 def gscomposition(self, source, target):
-    #import pdb;pdb.set_trace()
-    pass
+    # get container. ownedEnds len should always be 1
+    container = source.ownedEnds[0].type
+    
+    # lookup child from memberEnds
+    child = None
+    for member in source.memberEnds:
+        if member.type is not container:
+            child = member.type
+            break
+    
+    # self containment
+    if len(source.memberEnds) == 1 and not child:
+        child = container
+    
+    # both end types need to be content types
+    if not container.stereotype('plone:content_type') \
+      or not child.stereotype('plone:content_type'):
+        return
+    
+    print 'hook now'
 
 
 @handler('gsdynamicview', 'uml2fs', 'semanticsgenerator',
