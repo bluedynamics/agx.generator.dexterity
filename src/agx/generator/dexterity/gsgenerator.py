@@ -82,6 +82,7 @@ def gsprofiletypes(self, source, target):
     type.params['ctype']['content_icon'] = content_icon
     type.params['ctype']['allow_discussion'] = 'False'
     type.params['ctype']['global_allow'] = 'True'
+    # XXX: maybe False for non contained ones?
     type.params['ctype']['filter_content_types'] = 'True'
     type.params['ctype']['allowed_content_types'] = list()
     
@@ -165,7 +166,18 @@ def gscomposition(self, source, target):
       or not child.stereotype('plone:content_type'):
         return
     
-    print 'hook now'
+    # read fti and append allowed content type
+    container_name = type_id(container, target.target)
+    child_name = type_id(child, target.target)
+    
+    egg = egg_source(source)
+    package = read_target_node(egg, target.target)
+    default = package['profiles']['default']
+    
+    name = '%s.xml' % container_name
+    fti = default['types'][name]
+    fti.params['ctype']['allowed_content_types'].append(child_name)
+    fti.params['ctype']['klass'] = 'plone.dexterity.content.Container'
 
 
 @handler('gsdynamicview', 'uml2fs', 'semanticsgenerator',
