@@ -143,6 +143,13 @@ def gsprofiletypes(self, source, target):
     })
 
 
+@handler('gscomposition', 'uml2fs', 'zcasemanticsgenerator',
+         'association', order=100)
+def gscomposition(self, source, target):
+    #import pdb;pdb.set_trace()
+    pass
+
+
 @handler('gsdynamicview', 'uml2fs', 'semanticsgenerator',
          'dependency', order=100)
 def gsdynamicview(self, source, target):

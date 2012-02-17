@@ -28,8 +28,19 @@
         <packagedElement xmi:type="uml:Dependency" xmi:id="_TGPQwFgLEeGNG5unf8Szeg" name="" supplier="_Jm2VUFJREeGZSeytnTlRxw" client="_MrJcoFgLEeGNG5unf8Szeg"/>
         <packagedElement xmi:type="uml:Class" xmi:id="_JS96cFi8EeG4Z-w98Q2zpg" name="SomeBehavior" clientDependency="_SNgMgFi8EeG4Z-w98Q2zpg _oEqtEFi8EeG4Z-w98Q2zpg"/>
         <packagedElement xmi:type="uml:Dependency" xmi:id="_SNgMgFi8EeG4Z-w98Q2zpg" name="" supplier="_Jm2VUFJREeGZSeytnTlRxw" client="_JS96cFi8EeG4Z-w98Q2zpg"/>
-        <packagedElement xmi:type="uml:Class" xmi:id="_hWlrgFi8EeG4Z-w98Q2zpg" name="Company"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_hWlrgFi8EeG4Z-w98Q2zpg" name="Company">
+          <ownedAttribute xmi:id="_EYDMcFloEeGtD5GMZ61r8A" name="person" type="_Jm2VUFJREeGZSeytnTlRxw" aggregation="composite" association="_EYFBoFloEeGtD5GMZ61r8A">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_EYDMcVloEeGtD5GMZ61r8A" value="1"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_EYDMclloEeGtD5GMZ61r8A" value="1"/>
+          </ownedAttribute>
+        </packagedElement>
         <packagedElement xmi:type="uml:Dependency" xmi:id="_oEqtEFi8EeG4Z-w98Q2zpg" name="" supplier="_hWlrgFi8EeG4Z-w98Q2zpg" client="_JS96cFi8EeG4Z-w98Q2zpg"/>
+        <packagedElement xmi:type="uml:Association" xmi:id="_EYFBoFloEeGtD5GMZ61r8A" name="" memberEnd="_EYFBoVloEeGtD5GMZ61r8A _EYDMcFloEeGtD5GMZ61r8A">
+          <ownedEnd xmi:id="_EYFBoVloEeGtD5GMZ61r8A" name="company" type="_hWlrgFi8EeG4Z-w98Q2zpg" association="_EYFBoFloEeGtD5GMZ61r8A">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_EYFBolloEeGtD5GMZ61r8A" value="1"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_EYFBo1loEeGtD5GMZ61r8A" value="1"/>
+          </ownedEnd>
+        </packagedElement>
       </packagedElement>
     </packagedElement>
     <profileApplication xmi:id="_5zkvQEy9EeGV5f8-MtNCTQ">

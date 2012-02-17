@@ -1,3 +1,4 @@
+from node.ext.uml.interfaces import IAssociation
 from agx.core import (
     Scope,
     registerScope,
@@ -70,6 +71,7 @@ class ObjectScope(Scope):
         return node.stereotype('dexterity:Object')
 
 
+registerScope('association', 'uml2fs', [IAssociation], Scope)
 registerScope('dxcollection', 'uml2fs', None, CollectionScope)
 registerScope('dxminmaxlen', 'uml2fs', None, MinMaxLenScope)
 registerScope('dxdict', 'uml2fs', None, DictScope)
