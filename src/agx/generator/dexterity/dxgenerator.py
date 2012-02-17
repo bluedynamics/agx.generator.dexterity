@@ -283,3 +283,9 @@ def dependencysorter(self, source, target):
     schema = read_target_node(source, target.target)
     module = schema.parent
     sort_classes_in_module(module)
+
+
+@handler('dxpackagedependencies', 'uml2fs', 'semanticsgenerator', 'pythonegg')
+def dxpackagedependencies(self, source, target):
+    setup = target.target['setup.py']
+    setup.params['setup_dependencies'].append('plone.app.dexterity')
