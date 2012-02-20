@@ -8,6 +8,11 @@
     factory="agx.generator.dexterity.dxgenerator.DexterityModuleNameChooser"
   />
   
+  <adapter
+    for="agx.generator.dexterity.dxgenerator.IDexterityBehavior"
+    factory="agx.generator.dexterity.dxgenerator.DexterityModuleNameChooser"
+  />
+  
   <utility
     name="agx.generator.dexterity.profilelocation"
 	provides="agx.core.interfaces.IProfileLocation"

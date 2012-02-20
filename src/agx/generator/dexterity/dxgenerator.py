@@ -1,8 +1,7 @@
+import os
 import uuid
 from zope.interface import alsoProvides
 from node.ext import python
-from node.ext.python.interfaces import IModule
-
 from node.ext.python.utils import Imports
 from node.ext.uml.utils import (
     TaggedValues,
@@ -26,27 +25,22 @@ from agx.generator.pyegg.utils import (
     sort_classes_in_module,
     egg_source,
 )
-from agx.generator.zca.utils import (
-    zcml_include_package,
-    set_zcml_directive,
-    set_zcml_namespace
-)
-
+from agx.generator.zca.utils import zcml_include_package
 from agx.generator.dexterity.schema import (
     field_properties,
     field_types,
 )
 
 
-class IDexterityType(IClass):
-    """Marker.
-    """
-
-
 class DexterityModuleNameChooser(ModuleNameChooser):
     
     def __call__(self):
         return self.context.name[1:].lower()
+
+
+###############################################################################
+# schema field related
+###############################################################################
 
 
 def tgv_value(attr, value):
@@ -190,19 +184,16 @@ def dxobject(self, source, target):
     transform_attribute(source, target, 'object', object_tgv)
 
 
+###############################################################################
+# type related
+###############################################################################
+
+
 @handler('typeview', 'uml2fs', 'zcagenerator', 'contenttype', order=100)
 def typeview(self, source, target):
     schema = read_target_node(source, target.target)
     module = schema.parent
     
-    if IModule.providedBy(module):
-        directory=module.parent
-    else:
-        directory=module
-    
-    set_zcml_directive(directory,'configure.zcml','include','package','grok')
-    set_zcml_namespace(directory,'configure.zcml','grok','http://namespaces.zope.org/grok')
-
     classname = '%sView' % schema.classname[1:]
     if module.classes(classname):
         view = module.classes(classname)[0]
@@ -216,12 +207,9 @@ def typeview(self, source, target):
     
     context = "grok.context(%s)" % schema.classname
     require = "grok.require('zope2.View')"
-    template = "template = PageTemplate('templates/%s.pt')" \
-        % schema.classname[1:].lower()
     
     context_exists = False
     require_exists = False
-    template_exists = False
     
     for block in view.blocks():
         for line in block.lines:
@@ -229,20 +217,31 @@ def typeview(self, source, target):
                 context_exists = True
             if line == require:
                 require_exists = True
-            if line == template:
-                template_exists = True
     
     block = python.Block()
     block.__name__ = str(uuid.uuid4())
+    
     if not context_exists:
         block.lines.append(context)
     if not require_exists:
         block.lines.append(require)
-    if not template_exists:
-        block.lines.append(template)
     
     if block.lines:
         view.insertfirst(block)
+    
+    template = False
+    for attr in view.attributes():
+        if 'template' in attr.targets:
+            template = attr
+            break
+    
+    if not template:
+        template = python.Attribute()
+        template.targets = ['template']
+        view[str(uuid.uuid4())] = template
+    
+    template.value = "PageTemplate('templates/%s.pt')" \
+        % schema.classname[1:].lower()
     
     imp = Imports(module)
     imp.set('plone.directives', [['dexterity', None]])
@@ -261,6 +260,11 @@ def typeview(self, source, target):
     if template_name not in templates:
         pt = templates[template_name] = XMLTemplate()
         pt.template = 'agx.generator.dexterity:templates/displayform.pt'
+
+
+class IDexterityType(IClass):
+    """Marker.
+    """
 
 
 @handler('schemaumlclass', 'xmi2uml', 'finalizegenerator', 'class')
@@ -302,5 +306,127 @@ def dependencysorter(self, source, target):
 def dxpackagedependencies(self, source, target):
     setup = target.target['setup.py']
     setup.params['setup_dependencies'].append('plone.app.dexterity')
+
+
+###############################################################################
+# behavior related
+###############################################################################
+
+
+class IDexterityBehavior(IClass):
+    """Marker.
+    """
+
+
+@handler('behaviorumlclass', 'xmi2uml', 'finalizegenerator', 'class')
+def behaviorumlclass(self, source, target):
+    class_ = read_target_node(source, target.target)
+    if class_.stereotype('dexterity:behavior'):
+        class_.__name__ = 'I%s' % class_.name
+        alsoProvides(class_, IDexterityBehavior)
+
+
+@handler('behaviorschema', 'uml2fs', 'zcagenerator', 'dxbehavior', order=100)
+def behaviorschema(self, source, target):
+    schema = read_target_node(source, target.target)
+    module = schema.parent
+    
+    # check whether this behavior has schema attributes
+    if not 'form.Schema' in schema.bases:
+        schema.bases.append('form.Schema')
     
     
+    alsoprovides = "alsoProvides(%s, form.IFormFieldProvider)" \
+        % schema.classname
+    
+    alsoprovides_exists = False
+    
+    for block in module.blocks():
+        for line in block.lines:
+            if line == alsoprovides:
+                alsoprovides_exists = True
+    
+    block = python.Block()
+    block.__name__ = str(uuid.uuid4())
+    
+    if not alsoprovides_exists:
+        block.lines.append(alsoprovides)
+    
+    if block.lines:
+        module.insertafter(block, schema)
+    
+    egg = egg_source(source)
+    
+    imp = Imports(schema.parent)
+    imp.set(egg.name, [['_', None]])
+    imp.set('plone.directives', [['form', None]])
+    imp.set('zope.interface', [['alsoProvides', None]])
+
+
+@handler('behavioradapter', 'uml2fs', 'zcagenerator', 'dxbehavior', order=110)
+def behavioradapter(self, source, target):
+    schema = read_target_node(source, target.target)
+    module = schema.parent
+    
+    adaptername = schema.classname[1:]
+    if module.classes(adaptername):
+        adapter = module.classes(adaptername)[0]
+    else:
+        adapter = python.Class()
+        module[uuid.uuid4()] = adapter
+    adapter.classname = adaptername
+    
+    implements = "implements(%s)" % schema.classname
+    
+    implements_exists = False
+    
+    for block in adapter.blocks():
+        for line in block.lines:
+            if line == implements:
+                implements_exists = True
+    
+    block = python.Block()
+    block.__name__ = str(uuid.uuid4())
+    
+    if not implements_exists:
+        block.lines.append(implements)
+    
+    if block.lines:
+        adapter.insertfirst(block)
+    
+    # ``__init__ only created once``
+    # XXX: check if signature changed and raise error
+    if not adapter.functions('__init__'):
+        init = python.Function(functionname='__init__')
+        init.args.append('context')
+        block = init[str(uuid.uuid4())] = python.Block()
+        block.lines.append('self.context = context')
+        adapter[str(uuid.uuid4())] = init
+    
+    imp = Imports(module)
+    imp.set('zope.interface', [['implements', None]])
+    
+    # read or create configure.zcml
+    package = module.parent
+    if 'configure.zcml' in package:
+        configure = package['configure.zcml']
+    else:
+        path = package.path
+        path.append('configure.zcml')
+        fullpath = os.path.join(*path)
+        configure = ZCMLFile(fullpath)
+        configure.nsmap['plone'] = 'http://namespaces.plone.org/plone'
+        package['configure.zcml'] = configure
+    
+    provides = '.%s.%s' % (module.modulename, schema.classname)
+    factory = '.%s.%s' % (module.modulename, adapter.classname)
+    
+    # XXX: maybe more filters
+    if not configure.filter(
+            tag='plone:behavior', attr='factory', value=factory):
+        behavior = SimpleDirective(name='plone:behavior', parent=configure)
+        behavior.attrs['title'] = adapter.classname
+        # XXX: stereotype tgv
+        behavior.attrs['description'] = adapter.classname
+        behavior.attrs['provides'] = provides
+        behavior.attrs['factory'] = factory
