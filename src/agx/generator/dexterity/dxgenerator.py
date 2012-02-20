@@ -201,12 +201,9 @@ def typeview(self, source, target):
     
     context = "grok.context(%s)" % schema.classname
     require = "grok.require('zope2.View')"
-    template = "template = PageTemplate('templates/%s.pt')" \
-        % schema.classname[1:].lower()
     
     context_exists = False
     require_exists = False
-    template_exists = False
     
     for block in view.blocks():
         for line in block.lines:
@@ -214,20 +211,31 @@ def typeview(self, source, target):
                 context_exists = True
             if line == require:
                 require_exists = True
-            if line == template:
-                template_exists = True
     
     block = python.Block()
     block.__name__ = str(uuid.uuid4())
+    
     if not context_exists:
         block.lines.append(context)
     if not require_exists:
         block.lines.append(require)
-    if not template_exists:
-        block.lines.append(template)
     
     if block.lines:
         view.insertfirst(block)
+    
+    template = False
+    for attr in view.attributes():
+        if 'template' in attr.targets:
+            template = attr
+            break
+    
+    if not template:
+        template = python.Attribute()
+        template.targets = ['template']
+        view[str(uuid.uuid4())] = template
+    
+    template.value = "PageTemplate('templates/%s.pt')" \
+        % schema.classname[1:].lower()
     
     imp = Imports(module)
     imp.set('plone.directives', [['dexterity', None]])
