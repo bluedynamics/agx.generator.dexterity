@@ -325,21 +325,82 @@ def behaviorumlclass(self, source, target):
         alsoProvides(class_, IDexterityBehavior)
 
 
-@handler('behaviorschema', 'uml2fs', 'zcagenerator', 'dxbehavior', order=110)
+@handler('behaviorschema', 'uml2fs', 'zcagenerator', 'dxbehavior', order=100)
 def behaviorschema(self, source, target):
     schema = read_target_node(source, target.target)
     module = schema.parent
     
-    #view = module.classes('%sView' % schema.classname[1:])[0]
-    #tok = token(str(view.uuid), True, depends_on=set())
-    #tok.depends_on.add(schema)
-    
     # check whether this behavior has schema attributes
     if not 'form.Schema' in schema.bases:
         schema.bases.append('form.Schema')
+    
+    
+    alsoprovides = "alsoProvides(%s, form.IFormFieldProvider)" \
+        % schema.classname
+    
+    alsoprovides_exists = False
+    
+    for block in module.blocks():
+        for line in block.lines:
+            if line == alsoprovides:
+                alsoprovides_exists = True
+    
+    block = python.Block()
+    block.__name__ = str(uuid.uuid4())
+    
+    if not alsoprovides_exists:
+        block.lines.append(alsoprovides)
+    
+    if block.lines:
+        module.insertafter(block, schema)
     
     egg = egg_source(source)
     
     imp = Imports(schema.parent)
     imp.set(egg.name, [['_', None]])
     imp.set('plone.directives', [['form', None]])
+    imp.set('zope.interface', [['alsoProvides', None]])
+
+
+@handler('behavioradapter', 'uml2fs', 'zcagenerator', 'dxbehavior', order=110)
+def behavioradapter(self, source, target):
+    schema = read_target_node(source, target.target)
+    module = schema.parent
+    
+    adaptername = schema.classname[1:]
+    if module.classes(adaptername):
+        adapter = module.classes(adaptername)[0]
+    else:
+        adapter = python.Class()
+        module[uuid.uuid4()] = adapter
+    adapter.classname = adaptername
+    
+    implements = "implements(%s)" % schema.classname
+    
+    implements_exists = False
+    
+    for block in adapter.blocks():
+        for line in block.lines:
+            if line == implements:
+                implements_exists = True
+    
+    block = python.Block()
+    block.__name__ = str(uuid.uuid4())
+    
+    if not implements_exists:
+        block.lines.append(implements)
+    
+    if block.lines:
+        adapter.insertfirst(block)
+    
+    # ``__init__ only created once``
+    # XXX: check if signature changed and raise error
+    if not adapter.functions('__init__'):
+        init = python.Function(functionname='__init__')
+        init.args.append('context')
+        block = init[str(uuid.uuid4())] = python.Block()
+        block.lines.append('self.context = context')
+        adapter[str(uuid.uuid4())] = init
+    
+    imp = Imports(module)
+    imp.set('zope.interface', [['implements', None]])
