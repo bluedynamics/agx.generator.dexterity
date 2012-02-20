@@ -1,6 +1,8 @@
 import uuid
 from zope.interface import alsoProvides
 from node.ext import python
+from node.ext.python.interfaces import IModule
+
 from node.ext.python.utils import Imports
 from node.ext.uml.utils import (
     TaggedValues,
@@ -24,7 +26,12 @@ from agx.generator.pyegg.utils import (
     sort_classes_in_module,
     egg_source,
 )
-from agx.generator.zca.utils import zcml_include_package
+from agx.generator.zca.utils import (
+    zcml_include_package,
+    set_zcml_directive,
+    set_zcml_namespace
+)
+
 from agx.generator.dexterity.schema import (
     field_properties,
     field_types,
@@ -188,6 +195,14 @@ def typeview(self, source, target):
     schema = read_target_node(source, target.target)
     module = schema.parent
     
+    if IModule.providedBy(module):
+        directory=module.parent
+    else:
+        directory=module
+    
+    set_zcml_directive(directory,'configure.zcml','include','package','grok')
+    set_zcml_namespace(directory,'configure.zcml','grok','http://namespaces.zope.org/grok')
+
     classname = '%sView' % schema.classname[1:]
     if module.classes(classname):
         view = module.classes(classname)[0]
@@ -287,3 +302,5 @@ def dependencysorter(self, source, target):
 def dxpackagedependencies(self, source, target):
     setup = target.target['setup.py']
     setup.params['setup_dependencies'].append('plone.app.dexterity')
+    
+    
