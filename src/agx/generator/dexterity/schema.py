@@ -1,5 +1,60 @@
 # Python form field definitions related to
 # http://plone.org/products/dexterity/documentation/manual/developer-manual/reference/fields
+
+
+# field properties
+#
+# i18n_string:
+#     convert given value to _(u'VALUE')
+#
+# string:
+#     convert given value to u'VALUE'
+#
+# bool:
+#     bool evaluation of given value
+#
+# int:
+#     cast value to int
+#
+# raw:
+#     no value manipulation
+#
+field_properties = {
+    # field
+    'title': 'i18n_string',
+    'description': 'i18n_string',
+    'required': 'bool',
+    'readonly': 'bool',
+    'default': 'raw',
+    'missing_value': 'raw',
+    
+    # minmaxlen
+    'min_length': 'int',
+    'max_length': 'int',
+    
+    # collection
+    'value_type': 'raw',
+    'unique': 'bool',
+    
+    # dict
+    'key_type': 'raw',
+    'value_type': 'raw',
+    
+    # richtext
+    'default_mime_type': 'string',
+    'output_mime_type': 'string',
+    'allowed_mime_types': 'raw',
+    
+    # minmax
+    'min': 'raw',
+    'max': 'raw',
+    
+    # object
+    'schema': 'string',
+}
+
+
+# field types
 #
 # must:
 #     factory -> i.e. 'schema.Tuple'
@@ -12,10 +67,8 @@
 # defaults:
 #     import -> 'schema'
 #     import_from -> 'zope'
-
-
-mapping = {
-    
+#
+field_types = {
     # zope.schema.interfaces.ICollection related fields
     'collection': {
         'dexterity:Tuple': {

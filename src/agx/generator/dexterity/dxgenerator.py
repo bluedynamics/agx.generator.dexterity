@@ -24,7 +24,10 @@ from agx.generator.pyegg.utils import (
     sort_classes_in_module,
 )
 from agx.generator.zca.utils import zcml_include_package
-from agx.generator.dexterity.schema import mapping
+from agx.generator.dexterity.schema import (
+    field_properties,
+    field_types,
+)
 
 
 class IDexterityType(IClass):
@@ -38,11 +41,32 @@ class DexterityModuleNameChooser(ModuleNameChooser):
         return self.context.name[1:].lower()
 
 
+def tgv_value(attr, value):
+    format = field_properties[attr]
+    if format == 'i18n_string':
+        value = value.strip('"').strip("'")
+        return '_(u"%s")' % value
+    elif format == 'string':
+        value = value.strip('"').strip("'")
+        return "u'%s'" % value
+    elif format == 'bool':
+        if value in ['True', 'true', 'TRUE', '1']:
+            return True
+        if value in ['False', 'false', 'FALSE', '0']:
+            return False
+        return bool(value)
+    elif format == 'int':
+        return int(value)
+    elif format == 'raw':
+        return value
+    raise RuntimeError(u"Unknown format for '%s': '%s'" % (attr, format))
+
+
 def read_tgv(tgv, attribute, stereotype, attrs):
     for attr in attrs:
         value = tgv.direct(attr, stereotype)
         if value is not UNSET:
-            attribute.kwargs[attr] = value
+            attribute.kwargs[attr] = tgv_value(attr, value)
 
 
 def field_tgv(tgv, attribute, stereotype):
@@ -120,7 +144,7 @@ def object_tgv(tgv, attribute, stereotype):
 
 
 def field_def_for(group, stereotype):
-    field = mapping[group].get(stereotype)
+    field = field_types[group].get(stereotype)
     if not field:
         return None
     return {
