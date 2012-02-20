@@ -158,7 +158,7 @@ def gscomposition(self, source, target):
             break
     
     # self containment
-    if len(source.memberEnds) == 1 and not child:
+    if child is None:
         child = container
     
     # both end types need to be content types
