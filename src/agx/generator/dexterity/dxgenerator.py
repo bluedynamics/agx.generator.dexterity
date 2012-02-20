@@ -29,6 +29,7 @@ from agx.generator.zca.utils import (
     zcml_include_package,
     set_zcml_namespace,
     set_zcml_directive,
+    get_zcml,
 )
 
 from agx.generator.dexterity.schema import (
@@ -206,8 +207,14 @@ def typeview(self, source, target):
     else:
         directory=module
 
+    nsmap={ None:   'http://namespaces.zope.org/zope',
+            'genericsetup': 'http://namespaces.zope.org/genericsetup',
+            'plone':'http://namespaces.plone.org/plone',
+            'grok':'http://namespaces.zope.org/grok'}
+
+    zcmlfile=get_zcml(directory,'configure.zcml',nsmap=nsmap)
     set_zcml_directive(directory,'configure.zcml','include','package','grok')
-    set_zcml_namespace(directory,'configure.zcml','grok','http://namespaces.zope.org/grok')
+#    set_zcml_namespace(directory,'configure.zcml','grok','http://namespaces.zope.org/grok')
     
     classname = '%sView' % schema.classname[1:]
     if module.classes(classname):
@@ -431,6 +438,7 @@ def behavioradapter(self, source, target):
         fullpath = os.path.join(*path)
         configure = ZCMLFile(fullpath)
         configure.nsmap['plone'] = 'http://namespaces.plone.org/plone'
+        configure.nsmap['grok'] = 'http://namespaces.zope.org/grok'
         package['configure.zcml'] = configure
     
     provides = '.%s.%s' % (module.modulename, schema.classname)
