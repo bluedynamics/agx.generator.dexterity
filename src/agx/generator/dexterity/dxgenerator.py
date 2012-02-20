@@ -22,6 +22,7 @@ from agx.generator.pyegg.treesync import ModuleNameChooser
 from agx.generator.pyegg.utils import (
     set_copyright,
     sort_classes_in_module,
+    egg_source,
 )
 from agx.generator.zca.utils import zcml_include_package
 from agx.generator.dexterity.schema import (
@@ -299,6 +300,9 @@ def schemaclass(self, source, target):
     
     imp = Imports(schema.parent)
     imp.set('plone.directives', [['form', None]])
+    
+    egg = egg_source(source)
+    imp.set(egg.name, [['_', None]])
 
 
 @handler('typemodulesorter', 'uml2fs', 'zcasemanticsgenerator', 
