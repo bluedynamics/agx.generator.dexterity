@@ -33,8 +33,12 @@ Setup configuration and emulate main routine.
     >>> dexterityprofilepath = \
     ...     pkg_resources.resource_filename('agx.generator.dexterity', subpath)
     
+    >>> subpath = 'profiles/buildout.profile.uml'
+    >>> buildoutprofilepath = \
+    ...     pkg_resources.resource_filename('agx.generator.buildout', subpath)
+    
     >>> modelpaths = [modelpath, eggprofilepath, zcaprofilepath,
-    ...     ploneprofilepath, dexterityprofilepath]
+    ...     ploneprofilepath, dexterityprofilepath, buildoutprofilepath]
     
     >>> outdir = os.path.join(datadir, 'agx.generator.dexterity-sample')
     >>> controller = agx.core.Controller()
