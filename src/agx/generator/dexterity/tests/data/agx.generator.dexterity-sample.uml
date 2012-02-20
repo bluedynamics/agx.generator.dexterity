@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dexterity="http:///schemas/dexterity/_ZdMRAFJTEeGZSeytnTlRxw/5" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:plone="http:///schemas/plone/_EVKKQFfYEeGNzK3rlQPxVA/7" xmlns:pyegg="http:///schemas/pyegg/_m3LEwPJqEeC2FJWWHfGcuA/17" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http:///schemas/dexterity/_ZdMRAFJTEeGZSeytnTlRxw/5 ../../profiles/dexterity.profile.uml#_ZdOGMFJTEeGZSeytnTlRxw http:///schemas/plone/_EVKKQFfYEeGNzK3rlQPxVA/7 ../../../../../../../agx.generator.plone/src/agx/generator/plone/profiles/plone.profile.uml#_EVKxUFfYEeGNzK3rlQPxVA http:///schemas/pyegg/_m3LEwPJqEeC2FJWWHfGcuA/17 ../../../../../../../agx.generator.pyegg/src/agx/generator/pyegg/profiles/pyegg.profile.uml#_m3OIEPJqEeC2FJWWHfGcuA">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dexterity="http:///schemas/dexterity/_6HrjIFvIEeG1f-Kr3Cp4uw/14" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:plone="http:///schemas/plone/_EVKKQFfYEeGNzK3rlQPxVA/7" xmlns:pyegg="http:///schemas/pyegg/_m3LEwPJqEeC2FJWWHfGcuA/17" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http:///schemas/dexterity/_6HrjIFvIEeG1f-Kr3Cp4uw/14 ../../profiles/dexterity.profile.uml#_6HtYUFvIEeG1f-Kr3Cp4uw http:///schemas/plone/_EVKKQFfYEeGNzK3rlQPxVA/7 ../../../../../../../agx.generator.plone/src/agx/generator/plone/profiles/plone.profile.uml#_EVKxUFfYEeGNzK3rlQPxVA http:///schemas/pyegg/_m3LEwPJqEeC2FJWWHfGcuA/17 ../../../../../../../agx.generator.pyegg/src/agx/generator/pyegg/profiles/pyegg.profile.uml#_m3OIEPJqEeC2FJWWHfGcuA">
   <uml:Model xmi:id="_vbqH8Ey3EeGV5f8-MtNCTQ" name="model">
     <packagedElement xmi:type="uml:Package" xmi:id="_SE9PgEy-EeGV5f8-MtNCTQ" name="agx.testpackage">
       <packagedElement xmi:type="uml:Package" xmi:id="_Ha7QUFJREeGZSeytnTlRxw" name="content">
@@ -146,7 +146,7 @@
     </profileApplication>
     <profileApplication xmi:id="_NSQVgEy-EeGV5f8-MtNCTQ">
       <eAnnotations xmi:id="_NT9lsEy-EeGV5f8-MtNCTQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="../../profiles/dexterity.profile.uml#_ZdOGMFJTEeGZSeytnTlRxw"/>
+        <references xmi:type="ecore:EPackage" href="../../profiles/dexterity.profile.uml#_6HtYUFvIEeG1f-Kr3Cp4uw"/>
       </eAnnotations>
       <appliedProfile href="../../profiles/dexterity.profile.uml#_IXXe8Ey1EeGV5f8-MtNCTQ"/>
     </profileApplication>
@@ -174,4 +174,11 @@
   <dexterity:TextLine xmi:id="_MOWKMFugEeGtD5GMZ61r8A" base_Property="_prB8kFueEeGtD5GMZ61r8A" title="'Tax Number'" description="'Tax number of Company'"/>
   <dexterity:TextLine xmi:id="_RHwwMFugEeGtD5GMZ61r8A" base_Property="_wIZBkFueEeGtD5GMZ61r8A" title="'Department Name'" description="'Name of Department'"/>
   <plone:content_type xmi:id="_bXgFMFuhEeGtD5GMZ61r8A" base_Class="_Mb_2kFueEeGtD5GMZ61r8A"/>
+  <dexterity:behavior_standard xmi:id="_XIniwFvJEeG1f-Kr3Cp4uw" base_Class="_Jm2VUFJREeGZSeytnTlRxw"/>
+  <dexterity:behavior_basic xmi:id="_bQHjoFvJEeG1f-Kr3Cp4uw" base_Class="_Mb_2kFueEeGtD5GMZ61r8A"/>
+  <dexterity:behavior_dublincore xmi:id="_bQQGgFvJEeG1f-Kr3Cp4uw" base_Class="_Mb_2kFueEeGtD5GMZ61r8A"/>
+  <dexterity:behavior_namefromtitle xmi:id="_bQWNIFvJEeG1f-Kr3Cp4uw" base_Class="_Mb_2kFueEeGtD5GMZ61r8A"/>
+  <dexterity:behavior_ownership xmi:id="_bQmEwFvJEeG1f-Kr3Cp4uw" base_Class="_Mb_2kFueEeGtD5GMZ61r8A"/>
+  <dexterity:behavior_basic xmi:id="_dXYyIFvJEeG1f-Kr3Cp4uw" base_Class="_hWlrgFi8EeG4Z-w98Q2zpg"/>
+  <dexterity:behavior_namefromtitle xmi:id="_dXijIFvJEeG1f-Kr3Cp4uw" base_Class="_hWlrgFi8EeG4Z-w98Q2zpg"/>
 </xmi:XMI>
