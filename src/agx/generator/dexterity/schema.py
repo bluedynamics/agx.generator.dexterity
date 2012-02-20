@@ -1,4 +1,4 @@
-# Dexterity standard behavior related to
+# Dexterity standard behaviors related to
 # http://plone.org/products/dexterity/documentation/manual/developer-manual/reference/standard-behaviors
 #
 # key:
@@ -43,7 +43,7 @@ standard_behaviors = {
 #     no value manipulation
 #
 field_properties = {
-    # field
+    # zope.schema.interfaces.IField
     'title': 'i18n_string',
     'description': 'i18n_string',
     'required': 'bool',
@@ -51,28 +51,28 @@ field_properties = {
     'default': 'raw',
     'missing_value': 'raw',
     
-    # minmaxlen
+    # zope.schema.interfaces.IMinMaxLen
     'min_length': 'int',
     'max_length': 'int',
     
-    # collection
+    # zope.schema.interfaces.ICollection
     'value_type': 'raw',
     'unique': 'bool',
     
-    # dict
+    # zope.schema.interfaces.IDict
     'key_type': 'raw',
     'value_type': 'raw',
     
-    # richtext
+    # plone.app.textfield.interfaces.IRichText
     'default_mime_type': 'string',
     'output_mime_type': 'string',
     'allowed_mime_types': 'raw',
     
-    # minmax
+    # zope.schema.interfaces.IMinMax
     'min': 'raw',
     'max': 'raw',
     
-    # object
+    # zope.schema.interfaces.IObject
     'schema': 'string',
 }
 

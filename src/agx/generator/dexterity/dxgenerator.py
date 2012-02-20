@@ -1,3 +1,4 @@
+import os
 import uuid
 from zope.interface import alsoProvides
 from node.ext import python
@@ -404,3 +405,28 @@ def behavioradapter(self, source, target):
     
     imp = Imports(module)
     imp.set('zope.interface', [['implements', None]])
+    
+    # read or create configure.zcml
+    package = module.parent
+    if 'configure.zcml' in package:
+        configure = package['configure.zcml']
+    else:
+        path = package.path
+        path.append('configure.zcml')
+        fullpath = os.path.join(*path)
+        configure = ZCMLFile(fullpath)
+        configure.nsmap['plone'] = 'http://namespaces.plone.org/plone'
+        package['configure.zcml'] = configure
+    
+    provides = '.%s.%s' % (module.name, schema.classname)
+    factory = '.%s.%s' % (module.name, adapter.classname)
+    
+    # XXX: maybe more filters
+    if not configure.filter(
+            tag='plone:behavior', attr='factory', value=factory):
+        behavior = SimpleDirective(name='plone:behavior', parent=configure)
+        behavior.attrs['title'] = adapter.classname
+        # XXX: stereotype tgv
+        behavior.attrs['description'] = adapter.classname
+        behavior.attrs['provides'] = provides
+        behavior.attrs['factory'] = factory
