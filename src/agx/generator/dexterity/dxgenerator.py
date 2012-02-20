@@ -233,7 +233,8 @@ def typeview(self, source, target):
     
     context = "grok.context(%s)" % schema.classname
     require = "grok.require('zope2.View')"
-    template = "grok.template('templates/%s')" % schema.classname[1:].lower()
+    template = "template = PageTemplate('templates/%s.pt')" \
+        % schema.classname[1:].lower()
     
     context_exists = False
     require_exists = False
@@ -263,6 +264,7 @@ def typeview(self, source, target):
     imp = Imports(module)
     imp.set('plone.directives', [['dexterity', None]])
     imp.set('five', [['grok', None]])
+    imp.set('grokcore.view.components', [['PageTemplate', None]])
     
     directory = module.parent
     template_name = '%s.pt' % schema.classname[1:].lower()
@@ -298,11 +300,11 @@ def schemaclass(self, source, target):
     if not 'form.Schema' in schema.bases:
         schema.bases.append('form.Schema')
     
-    imp = Imports(schema.parent)
-    imp.set('plone.directives', [['form', None]])
-    
     egg = egg_source(source)
+    
+    imp = Imports(schema.parent)
     imp.set(egg.name, [['_', None]])
+    imp.set('plone.directives', [['form', None]])
 
 
 @handler('typemodulesorter', 'uml2fs', 'zcasemanticsgenerator', 
