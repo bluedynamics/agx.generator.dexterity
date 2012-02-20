@@ -207,14 +207,13 @@ def typeview(self, source, target):
     else:
         directory=module
 
-    nsmap={ None:   'http://namespaces.zope.org/zope',
-            'genericsetup': 'http://namespaces.zope.org/genericsetup',
-            'plone':'http://namespaces.plone.org/plone',
-            'grok':'http://namespaces.zope.org/grok'}
-
-    zcmlfile=get_zcml(directory,'configure.zcml',nsmap=nsmap)
-    set_zcml_directive(directory,'configure.zcml','include','package','grok')
-#    set_zcml_namespace(directory,'configure.zcml','grok','http://namespaces.zope.org/grok')
+    nsmap = {
+        None: 'http://namespaces.zope.org/zope',
+        'plone': 'http://namespaces.plone.org/plone',
+        'grok': 'http://namespaces.zope.org/grok',
+    }
+    zcmlfile = get_zcml(directory, 'configure.zcml', nsmap=nsmap)
+    set_zcml_directive(directory, 'configure.zcml', 'grok:grok', 'package', '.')
     
     classname = '%sView' % schema.classname[1:]
     if module.classes(classname):
