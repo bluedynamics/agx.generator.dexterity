@@ -418,8 +418,8 @@ def behavioradapter(self, source, target):
         configure.nsmap['plone'] = 'http://namespaces.plone.org/plone'
         package['configure.zcml'] = configure
     
-    provides = '.%s.%s' % (module.name, schema.classname)
-    factory = '.%s.%s' % (module.name, adapter.classname)
+    provides = '.%s.%s' % (module.modulename, schema.classname)
+    factory = '.%s.%s' % (module.modulename, adapter.classname)
     
     # XXX: maybe more filters
     if not configure.filter(
