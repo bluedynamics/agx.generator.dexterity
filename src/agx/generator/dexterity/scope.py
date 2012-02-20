@@ -71,6 +71,12 @@ class ObjectScope(Scope):
         return node.stereotype('dexterity:Object')
 
 
+class BehaviorScope(Scope):
+    
+    def __call__(self, node):
+        return node.stereotype('dexterity:behavior')
+
+
 registerScope('association', 'uml2fs', [IAssociation], Scope)
 registerScope('dxcollection', 'uml2fs', None, CollectionScope)
 registerScope('dxminmaxlen', 'uml2fs', None, MinMaxLenScope)
@@ -79,3 +85,4 @@ registerScope('dxfield', 'uml2fs', None, FieldScope)
 registerScope('dxrichtext', 'uml2fs', None, RichTextScope)
 registerScope('dxminmax', 'uml2fs', None, MinMaxScope)
 registerScope('dxobject', 'uml2fs', None, ObjectScope)
+registerScope('dxbehavior', 'uml2fs', None, BehaviorScope)

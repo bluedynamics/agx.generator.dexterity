@@ -31,15 +31,15 @@ from agx.generator.dexterity.schema import (
 )
 
 
-class IDexterityType(IClass):
-    """Marker.
-    """
-
-
 class DexterityModuleNameChooser(ModuleNameChooser):
     
     def __call__(self):
         return self.context.name[1:].lower()
+
+
+###############################################################################
+# schema field related
+###############################################################################
 
 
 def tgv_value(attr, value):
@@ -183,6 +183,11 @@ def dxobject(self, source, target):
     transform_attribute(source, target, 'object', object_tgv)
 
 
+###############################################################################
+# type related
+###############################################################################
+
+
 @handler('typeview', 'uml2fs', 'zcagenerator', 'contenttype', order=100)
 def typeview(self, source, target):
     schema = read_target_node(source, target.target)
@@ -256,6 +261,11 @@ def typeview(self, source, target):
         pt.template = 'agx.generator.dexterity:templates/displayform.pt'
 
 
+class IDexterityType(IClass):
+    """Marker.
+    """
+
+
 @handler('schemaumlclass', 'xmi2uml', 'finalizegenerator', 'class')
 def schemaumlclass(self, source, target):
     class_ = read_target_node(source, target.target)
@@ -295,3 +305,41 @@ def dependencysorter(self, source, target):
 def dxpackagedependencies(self, source, target):
     setup = target.target['setup.py']
     setup.params['setup_dependencies'].append('plone.app.dexterity')
+
+
+###############################################################################
+# behavior related
+###############################################################################
+
+
+class IDexterityBehavior(IClass):
+    """Marker.
+    """
+
+
+@handler('behaviorumlclass', 'xmi2uml', 'finalizegenerator', 'class')
+def behaviorumlclass(self, source, target):
+    class_ = read_target_node(source, target.target)
+    if class_.stereotype('dexterity:behavior'):
+        class_.__name__ = 'I%s' % class_.name
+        alsoProvides(class_, IDexterityBehavior)
+
+
+@handler('behaviorschema', 'uml2fs', 'zcagenerator', 'dxbehavior', order=110)
+def behaviorschema(self, source, target):
+    schema = read_target_node(source, target.target)
+    module = schema.parent
+    
+    #view = module.classes('%sView' % schema.classname[1:])[0]
+    #tok = token(str(view.uuid), True, depends_on=set())
+    #tok.depends_on.add(schema)
+    
+    # check whether this behavior has schema attributes
+    if not 'form.Schema' in schema.bases:
+        schema.bases.append('form.Schema')
+    
+    egg = egg_source(source)
+    
+    imp = Imports(schema.parent)
+    imp.set(egg.name, [['_', None]])
+    imp.set('plone.directives', [['form', None]])
