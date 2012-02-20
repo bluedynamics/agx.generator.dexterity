@@ -1,8 +1,31 @@
-# Python form field definitions related to
+# Dexterity standard behavior related to
+# http://plone.org/products/dexterity/documentation/manual/developer-manual/reference/standard-behaviors
+#
+# key:
+#     stereotype name
+#
+# value:
+#     behavior interface
+standard_behaviors = {
+    'dexterity:behavior_basic':
+        'plone.app.dexterity.behaviors.metadata.IBasic',
+    'dexterity:behavior_categorization':
+        'plone.app.dexterity.behaviors.metadata.ICategorization',
+    'dexterity:behavior_publication':
+        'plone.app.dexterity.behaviors.metadata.IPublication',
+    'dexterity:behavior_ownership':
+        'plone.app.dexterity.behaviors.metadata.IOwnership',
+    'dexterity:behavior_dublincore':
+        'plone.app.dexterity.behaviors.metadata.IDublinCore',
+    'dexterity:behavior_namefromtitle':
+        'plone.app.content.interfacess.INameFromTitle',
+    'dexterity:behavior_relateditems':
+        'plone.app.dexterity.behaviors.metadata.IRelatedItems',
+}
+
+
+# Schema field properties related to
 # http://plone.org/products/dexterity/documentation/manual/developer-manual/reference/fields
-
-
-# field properties
 #
 # i18n_string:
 #     convert given value to _(u'VALUE')
@@ -54,7 +77,8 @@ field_properties = {
 }
 
 
-# field types
+# Schema field types related to
+# http://plone.org/products/dexterity/documentation/manual/developer-manual/reference/fields
 #
 # must:
 #     factory -> i.e. 'schema.Tuple'

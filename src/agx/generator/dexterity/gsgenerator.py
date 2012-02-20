@@ -6,6 +6,7 @@ from agx.generator.pyegg.utils import (
     egg_source,
     class_base_name,
 )
+from agx.generator.dexterity.schema import standard_behaviors
 
 
 def type_id(source, target):
@@ -196,3 +197,27 @@ def gsdynamicview(self, source, target):
     name = '%s.xml' % full_name
     type_xml = default['types'][name]
     type_xml.params['ctype']['view_methods'].append(source.client.name)
+
+
+def get_standard_behaviors(source):
+    behaviors = list()
+    for stereotype in standard_behaviors.keys():
+        if source.stereotype(stereotype):
+            behaviors.append(standard_behaviors[stereotype])
+    return behaviors
+
+
+@handler('standardbehavior', 'uml2fs', 'zcasemanticsgenerator', 'contenttype')
+def standardbehavior(self, source, target):
+    if source.stereotype('dexterity:behavior_standard'):
+        behaviors = standard_behaviors.values()
+    else:
+        behaviors = get_standard_behaviors(source)
+    
+    package = read_target_node(egg_source(source), target.target)
+    default = package['profiles']['default']
+    full_name = type_id(source, target.target)
+    name = '%s.xml' % full_name
+    type_xml = default['types'][name]
+    for behavior in behaviors:
+        type_xml.params['ctype']['behaviors'].append(behavior)

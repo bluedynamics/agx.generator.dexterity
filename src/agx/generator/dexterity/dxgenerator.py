@@ -71,74 +71,42 @@ def read_tgv(tgv, attribute, stereotype, attrs):
 
 
 def field_tgv(tgv, attribute, stereotype):
-    """
-    - title: String
-    - description: String
-    - required: Bool
-    - readonly: Bool
-    - default: String
-    - missing_value: String
-    """
     attrs = ['title', 'description', 'required', 'readonly', 'default',
              'missing_value']
     read_tgv(tgv, attribute, stereotype, attrs)
 
 
 def minmaxlen_tgv(tgv, attribute, stereotype):
-    """
-    - min_length: Int
-    - max_length: Int
-    """
     field_tgv(tgv, attribute, stereotype)
     attrs = ['min_length', 'max_length']
     read_tgv(tgv, attribute, stereotype, attrs)
 
 
 def collection_tgv(tgv, attribute, stereotype):
-    """
-    - value_type: String
-    - unique: Bool
-    """
     minmaxlen_tgv(tgv, attribute, stereotype)
     attrs = ['value_type', 'unique']
     read_tgv(tgv, attribute, stereotype, attrs)
 
 
 def dict_tgv(tgv, attribute, stereotype):
-    """
-    - key_type: String
-    - value_type: String
-    """
     minmaxlen_tgv(tgv, attribute, stereotype)
     attrs = ['key_type', 'value_type']
     read_tgv(tgv, attribute, stereotype, attrs)
 
 
 def richtext_tgv(tgv, attribute, stereotype):
-    """
-    - default_mime_type: String
-    - output_mime_type: String
-    - allowed_mime_types: String
-    """
     field_tgv(tgv, attribute, stereotype)
     attrs = ['default_mime_type', 'output_mime_type', 'allowed_mime_types']
     read_tgv(tgv, attribute, stereotype, attrs)
 
 
 def minmax_tgv(tgv, attribute, stereotype):
-    """
-    - min: String
-    - max: String
-    """
     field_tgv(tgv, attribute, stereotype)
     attrs = ['min', 'max']
     read_tgv(tgv, attribute, stereotype, attrs)
 
 
 def object_tgv(tgv, attribute, stereotype):
-    """
-    - schema: String
-    """
     field_tgv(tgv, attribute, stereotype)
     attrs = ['schema']
     read_tgv(tgv, attribute, stereotype, attrs)
