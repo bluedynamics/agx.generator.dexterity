@@ -25,11 +25,18 @@ from agx.generator.pyegg.utils import (
     sort_classes_in_module,
     egg_source,
 )
-from agx.generator.zca.utils import zcml_include_package
+from agx.generator.zca.utils import (
+    zcml_include_package,
+    set_zcml_namespace,
+    set_zcml_directive,
+)
+
 from agx.generator.dexterity.schema import (
     field_properties,
     field_types,
 )
+
+from node.ext.python.interfaces import IModule
 
 
 class DexterityModuleNameChooser(ModuleNameChooser):
@@ -193,6 +200,14 @@ def dxobject(self, source, target):
 def typeview(self, source, target):
     schema = read_target_node(source, target.target)
     module = schema.parent
+    
+    if IModule.providedBy(module):
+        directory=module.parent
+    else:
+        directory=module
+
+    set_zcml_directive(directory,'configure.zcml','include','package','grok')
+    set_zcml_namespace(directory,'configure.zcml','grok','http://namespaces.zope.org/grok')
     
     classname = '%sView' % schema.classname[1:]
     if module.classes(classname):
