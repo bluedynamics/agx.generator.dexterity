@@ -2,13 +2,18 @@ import os
 import uuid
 from zope.interface import alsoProvides
 from node.ext import python
+from node.ext.python.interfaces import IModule
 from node.ext.python.utils import Imports
 from node.ext.uml.utils import (
     TaggedValues,
     UNSET,
 )
 from node.ext.uml.interfaces import IClass
-from node.ext.directory import Directory
+from node.ext.directory import (
+    MODE_BINARY,
+    File,
+    Directory,
+)
 from node.ext.template import XMLTemplate
 from node.ext.zcml import (
     ZCMLFile,
@@ -36,8 +41,7 @@ from agx.generator.dexterity.schema import (
     field_properties,
     field_types,
 )
-
-from node.ext.python.interfaces import IModule
+from agx.generator.dexterity.utils import type_id
 
 
 class DexterityModuleNameChooser(ModuleNameChooser):
@@ -283,6 +287,33 @@ def typeview(self, source, target):
     if template_name not in templates:
         pt = templates[template_name] = XMLTemplate()
         pt.template = 'agx.generator.dexterity:templates/displayform.pt'
+
+
+def templatepath(name):
+    return os.path.join(os.path.dirname(__file__), 'templates/%s' % name)
+
+
+@handler('typeicon', 'uml2fs', 'plonegenerator', 'contenttype', order=100)
+def typeicon(self, source, target):
+    egg = egg_source(source)
+    package = read_target_node(egg, target.target)
+    resources = package['resources']
+    icon = '%s_icon.png' % source.name[1:].lower()
+    if not icon in resources:
+        default = package['profiles']['default']
+        type_name = type_id(source, target.target)
+        name = '%s.xml' % type_name
+        
+        fti = default['types'][name]
+        if fti.params['ctype']['klass'] == 'plone.dexterity.content.Container':
+            path = templatepath('folder_icon.png')
+        else:
+            path = templatepath('document_icon.png')
+        
+        file = resources[icon] = File()
+        file.mode = MODE_BINARY
+        with open(path) as template:
+            file.data = template.read()
 
 
 class IDexterityType(IClass):
