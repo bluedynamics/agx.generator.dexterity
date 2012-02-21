@@ -5,6 +5,7 @@ from agx.core.util import read_target_node
 from agx.generator.pyegg.utils import (
     egg_source,
     class_base_name,
+    class_full_name,
 )
 from agx.generator.dexterity.schema import standard_behaviors
 
@@ -209,6 +210,7 @@ def get_standard_behaviors(source):
 
 @handler('standardbehavior', 'uml2fs', 'zcasemanticsgenerator', 'contenttype')
 def standardbehavior(self, source, target):
+    # XXX: cleanup standard behaviors, some inherit each other
     if source.stereotype('dexterity:behavior_standard'):
         behaviors = standard_behaviors.values()
     else:
@@ -221,3 +223,22 @@ def standardbehavior(self, source, target):
     type_xml = default['types'][name]
     for behavior in behaviors:
         type_xml.params['ctype']['behaviors'].append(behavior)
+
+
+@handler('gsbehavior', 'uml2fs', 'zcasemanticsgenerator', 'dependency')
+def gsbehavior(self, source, target):
+    if not source.client.stereotype('dexterity:behavior'):
+        return
+    
+    package = read_target_node(egg_source(source), target.target)
+    default = package['profiles']['default']
+    
+    supplier = source.supplier
+    full_name = type_id(supplier, target.target)
+    name = '%s.xml' % full_name
+    type_xml = default['types'][name]
+    
+    behavior_class = read_target_node(source.client, target.target)
+    behavior = class_full_name(behavior_class)
+    
+    type_xml.params['ctype']['behaviors'].append(behavior)

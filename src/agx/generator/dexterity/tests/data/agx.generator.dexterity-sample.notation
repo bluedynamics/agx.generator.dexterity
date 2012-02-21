@@ -57,11 +57,11 @@
               <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Jm8b8lJREeGZSeytnTlRxw" key="QualifiedNameDepth" value="1000"/>
             </eAnnotations>
             <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_25xVsFJREeGZSeytnTlRxw" source="Stereotype_Annotation">
-              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_XIwFoFvJEeG1f-Kr3Cp4uw" key="StereotypeWithQualifiedNameList" value=""/>
-              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_XIwFoVvJEeG1f-Kr3Cp4uw" key="StereotypeList" value=",gs::content_type,plone::content_type,dexterity::behavior_standard"/>
-              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_XIwFolvJEeG1f-Kr3Cp4uw" key="Stereotype_Presentation_Kind" value="HorizontalStereo"/>
-              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_XIwFo1vJEeG1f-Kr3Cp4uw" key="PropStereoDisplay" value=""/>
-              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_XIwFpFvJEeG1f-Kr3Cp4uw" key="StereotypePropertyLocation" value="Compartment"/>
+              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ZllL0Fx2EeG1f-Kr3Cp4uw" key="StereotypeWithQualifiedNameList" value=""/>
+              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ZllL0Vx2EeG1f-Kr3Cp4uw" key="StereotypeList" value=",gs::content_type,plone::content_type,dexterity::behavior_namefromtitle,dexterity::behavior_dublincore"/>
+              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ZllL0lx2EeG1f-Kr3Cp4uw" key="Stereotype_Presentation_Kind" value="HorizontalStereo"/>
+              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ZllL01x2EeG1f-Kr3Cp4uw" key="PropStereoDisplay" value=""/>
+              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ZllL1Fx2EeG1f-Kr3Cp4uw" key="StereotypePropertyLocation" value="Compartment"/>
             </eAnnotations>
             <children xmi:type="notation:DecorationNode" xmi:id="_Jm8b81JREeGZSeytnTlRxw" type="5014">
               <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_yvBMgFJREeGZSeytnTlRxw" source="Stereotype_Annotation">
@@ -206,11 +206,11 @@
               <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_hWngtFi8EeG4Z-w98Q2zpg" key="QualifiedNameDepth" value="1000"/>
             </eAnnotations>
             <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_kkQhYFi8EeG4Z-w98Q2zpg" source="Stereotype_Annotation">
-              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_dXm0kFvJEeG1f-Kr3Cp4uw" key="StereotypeWithQualifiedNameList" value=""/>
-              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_dXm0kVvJEeG1f-Kr3Cp4uw" key="StereotypeList" value="plone::content_type,dexterity::behavior_basic,dexterity::behavior_namefromtitle"/>
-              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_dXm0klvJEeG1f-Kr3Cp4uw" key="Stereotype_Presentation_Kind" value="HorizontalStereo"/>
-              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_dXm0k1vJEeG1f-Kr3Cp4uw" key="PropStereoDisplay" value=""/>
-              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_dXm0lFvJEeG1f-Kr3Cp4uw" key="StereotypePropertyLocation" value="Compartment"/>
+              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_XyNwwFx2EeG1f-Kr3Cp4uw" key="StereotypeWithQualifiedNameList" value=""/>
+              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_XyNwwVx2EeG1f-Kr3Cp4uw" key="StereotypeList" value="plone::content_type,dexterity::behavior_namefromtitle,dexterity::behavior_dublincore"/>
+              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_XyNwwlx2EeG1f-Kr3Cp4uw" key="Stereotype_Presentation_Kind" value="HorizontalStereo"/>
+              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_XyNww1x2EeG1f-Kr3Cp4uw" key="PropStereoDisplay" value=""/>
+              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_XyNwxFx2EeG1f-Kr3Cp4uw" key="StereotypePropertyLocation" value="Compartment"/>
             </eAnnotations>
             <children xmi:type="notation:DecorationNode" xmi:id="_hWngtVi8EeG4Z-w98Q2zpg" type="5014"/>
             <children xmi:type="notation:BasicCompartment" xmi:id="_hWngtli8EeG4Z-w98Q2zpg" type="7011">
@@ -267,11 +267,11 @@
               <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_McFWI1ueEeGtD5GMZ61r8A" key="QualifiedNameDepth" value="1000"/>
             </eAnnotations>
             <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_bX_NYFuhEeGtD5GMZ61r8A" source="Stereotype_Annotation">
-              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_bQpvIFvJEeG1f-Kr3Cp4uw" key="StereotypeWithQualifiedNameList" value=""/>
-              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_bQpvIVvJEeG1f-Kr3Cp4uw" key="StereotypeList" value="plone::content_type,dexterity::behavior_dublincore,dexterity::behavior_namefromtitle,dexterity::behavior_namefromtitle,dexterity::behavior_basic,dexterity::behavior_dublincore,dexterity::behavior_namefromtitle,dexterity::behavior_ownership"/>
-              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_bQpvIlvJEeG1f-Kr3Cp4uw" key="Stereotype_Presentation_Kind" value="HorizontalStereo"/>
-              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_bQpvI1vJEeG1f-Kr3Cp4uw" key="PropStereoDisplay" value=""/>
-              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_bQpvJFvJEeG1f-Kr3Cp4uw" key="StereotypePropertyLocation" value="Compartment"/>
+              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_YuX3AFx2EeG1f-Kr3Cp4uw" key="StereotypeWithQualifiedNameList" value=""/>
+              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_YuX3AVx2EeG1f-Kr3Cp4uw" key="StereotypeList" value="plone::content_type,dexterity::behavior_namefromtitle,dexterity::behavior_dublincore"/>
+              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_YuX3Alx2EeG1f-Kr3Cp4uw" key="Stereotype_Presentation_Kind" value="HorizontalStereo"/>
+              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_YuX3A1x2EeG1f-Kr3Cp4uw" key="PropStereoDisplay" value=""/>
+              <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_YuX3BFx2EeG1f-Kr3Cp4uw" key="StereotypePropertyLocation" value="Compartment"/>
             </eAnnotations>
             <children xmi:type="notation:DecorationNode" xmi:id="_McFWJFueEeGtD5GMZ61r8A" type="5014"/>
             <children xmi:type="notation:BasicCompartment" xmi:id="_McF9MFueEeGtD5GMZ61r8A" type="7011">
