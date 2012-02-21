@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:buildout="http:///schemas/buildout/_JO9FcFvjEeG1f-Kr3Cp4uw/1" xmlns:dexterity="http:///schemas/dexterity/_6HrjIFvIEeG1f-Kr3Cp4uw/14" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:plone="http:///schemas/plone/_EVKKQFfYEeGNzK3rlQPxVA/7" xmlns:pyegg="http:///schemas/pyegg/_m3LEwPJqEeC2FJWWHfGcuA/17" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http:///schemas/buildout/_JO9FcFvjEeG1f-Kr3Cp4uw/1 ../../../../../../../agx.generator.buildout/src/agx/generator/buildout/profiles/buildout.profile.uml#_JO9FcVvjEeG1f-Kr3Cp4uw http:///schemas/dexterity/_6HrjIFvIEeG1f-Kr3Cp4uw/14 ../../profiles/dexterity.profile.uml#_6HtYUFvIEeG1f-Kr3Cp4uw http:///schemas/plone/_EVKKQFfYEeGNzK3rlQPxVA/7 ../../../../../../../agx.generator.plone/src/agx/generator/plone/profiles/plone.profile.uml#_EVKxUFfYEeGNzK3rlQPxVA http:///schemas/pyegg/_m3LEwPJqEeC2FJWWHfGcuA/17 ../../../../../../../agx.generator.pyegg/src/agx/generator/pyegg/profiles/pyegg.profile.uml#_m3OIEPJqEeC2FJWWHfGcuA">
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:buildout="http:///schemas/buildout/_JO9FcFvjEeG1f-Kr3Cp4uw/1" xmlns:dexterity="http:///schemas/dexterity/_6HrjIFvIEeG1f-Kr3Cp4uw/14" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:plone="http:///schemas/plone/_QyR3QFyDEeGwDp_qVn1OTQ/8" xmlns:pyegg="http:///schemas/pyegg/_m3LEwPJqEeC2FJWWHfGcuA/17" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xsi:schemaLocation="http:///schemas/buildout/_JO9FcFvjEeG1f-Kr3Cp4uw/1 ../../../../../../../agx.generator.buildout/src/agx/generator/buildout/profiles/buildout.profile.uml#_JO9FcVvjEeG1f-Kr3Cp4uw http:///schemas/dexterity/_6HrjIFvIEeG1f-Kr3Cp4uw/14 ../../profiles/dexterity.profile.uml#_6HtYUFvIEeG1f-Kr3Cp4uw http:///schemas/plone/_QyR3QFyDEeGwDp_qVn1OTQ/8 ../../../../../../../agx.generator.plone/src/agx/generator/plone/profiles/plone.profile.uml#_QyU6kFyDEeGwDp_qVn1OTQ http:///schemas/pyegg/_m3LEwPJqEeC2FJWWHfGcuA/17 ../../../../../../../agx.generator.pyegg/src/agx/generator/pyegg/profiles/pyegg.profile.uml#_m3OIEPJqEeC2FJWWHfGcuA">
   <uml:Model xmi:id="_vbqH8Ey3EeGV5f8-MtNCTQ" name="model">
     <packagedElement xmi:type="uml:Package" xmi:id="_SE9PgEy-EeGV5f8-MtNCTQ" name="agx.testpackage">
       <packagedElement xmi:type="uml:Package" xmi:id="_Ha7QUFJREeGZSeytnTlRxw" name="content">
@@ -150,7 +150,7 @@
     </profileApplication>
     <profileApplication xmi:id="_8qrCUFb8EeG7eej248Qh-Q">
       <eAnnotations xmi:id="_8ruLMFb8EeG7eej248Qh-Q" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="../../../../../../../agx.generator.plone/src/agx/generator/plone/profiles/plone.profile.uml#_EVKxUFfYEeGNzK3rlQPxVA"/>
+        <references xmi:type="ecore:EPackage" href="../../../../../../../agx.generator.plone/src/agx/generator/plone/profiles/plone.profile.uml#_QyU6kFyDEeGwDp_qVn1OTQ"/>
       </eAnnotations>
       <appliedProfile href="../../../../../../../agx.generator.plone/src/agx/generator/plone/profiles/plone.profile.uml#__CiAUUwhEeGTE4gBrh7aXw"/>
     </profileApplication>
@@ -161,7 +161,7 @@
   <dexterity:Int xmi:id="_i9AFQFJREeGZSeytnTlRxw" base_Property="_enh50FJREeGZSeytnTlRxw" title="'Age'" description="'Age of Person'"/>
   <pyegg:pypackage xmi:id="_wpEhwFJTEeGZSeytnTlRxw" base_Package="_Ha7QUFJREeGZSeytnTlRxw"/>
   <plone:gsprofile xmi:id="_-gUVUFb8EeG7eej248Qh-Q" base_Package="_SE9PgEy-EeGV5f8-MtNCTQ"/>
-  <plone:dynamic_view xmi:id="_QcMFUFgLEeGNG5unf8Szeg" base_Class="_MrJcoFgLEeGNG5unf8Szeg"/>
+  <plone:dynamic_view xmi:id="_QcMFUFgLEeGNG5unf8Szeg" base_Class="_MrJcoFgLEeGNG5unf8Szeg" name="person_view"/>
   <dexterity:behavior xmi:id="_XHxHEFi8EeG4Z-w98Q2zpg" base_Class="_JS96cFi8EeG4Z-w98Q2zpg"/>
   <dexterity:TextLine xmi:id="_0wkRIFufEeGtD5GMZ61r8A" base_Property="_9hdw8FudEeGtD5GMZ61r8A" title="'Street'" description="'Street'"/>
   <dexterity:TextLine xmi:id="_5qsBwFufEeGtD5GMZ61r8A" base_Property="_CFxCkFueEeGtD5GMZ61r8A" title="'ZIP'" description="'ZIP'"/>
