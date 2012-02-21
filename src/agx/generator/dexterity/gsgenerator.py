@@ -1,5 +1,6 @@
 from node.ext.directory import Directory
 from node.ext.template import DTMLTemplate
+from node.ext.uml.utils import TaggedValues
 from agx.core import handler
 from agx.core.util import read_target_node
 from agx.generator.pyegg.utils import (
@@ -191,13 +192,16 @@ def gsdynamicview(self, source, target):
       or not source.client.stereotype('plone:dynamic_view'):
         return
     
+    view = source.client
     content_type = source.supplier
     package = read_target_node(egg_source(content_type), target.target)
     default = package['profiles']['default']
     full_name = type_id(content_type, target.target)
     name = '%s.xml' % full_name
     type_xml = default['types'][name]
-    type_xml.params['ctype']['view_methods'].append(source.client.name)
+    tgv = TaggedValues(view)
+    viewname = tgv.direct('name', 'plone:dynamic_view', view.name)
+    type_xml.params['ctype']['view_methods'].append(viewname)
 
 
 def get_standard_behaviors(source):
