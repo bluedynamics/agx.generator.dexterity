@@ -18,7 +18,7 @@ standard_behaviors = {
     'dexterity:behavior_dublincore':
         'plone.app.dexterity.behaviors.metadata.IDublinCore',
     'dexterity:behavior_namefromtitle':
-        'plone.app.content.interfacess.INameFromTitle',
+        'plone.app.content.interfaces.INameFromTitle',
     'dexterity:behavior_relateditems':
         'plone.app.dexterity.behaviors.metadata.IRelatedItems',
 }
