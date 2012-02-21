@@ -213,6 +213,8 @@ def typeview(self, source, target):
         'grok': 'http://namespaces.zope.org/grok',
     }
     zcmlfile = get_zcml(directory, 'configure.zcml', nsmap=nsmap)
+    
+    # include grok:grok directive if not set yet
     set_zcml_directive(directory, 'configure.zcml', 'grok:grok', 'package', '.')
     
     classname = '%sView' % schema.classname[1:]
