@@ -39,6 +39,7 @@ from agx.generator.zca.utils import (
 
 from agx.generator.dexterity.schema import (
     field_properties,
+    field_defaults,
     field_types,
 )
 from agx.generator.dexterity.utils import type_id
@@ -76,11 +77,18 @@ def tgv_value(attr, value):
     raise RuntimeError(u"Unknown format for '%s': '%s'" % (attr, format))
 
 
+_marker = object()
+
+
 def read_tgv(tgv, attribute, stereotype, attrs):
     for attr in attrs:
         value = tgv.direct(attr, stereotype)
         if value is not UNSET:
             attribute.kwargs[attr] = tgv_value(attr, value)
+        else:
+            default = field_defaults.get(attr, _marker)
+            if default is not _marker:
+                attribute.kwargs[attr] = default
 
 
 def field_tgv(tgv, attribute, stereotype):

@@ -77,6 +77,12 @@ field_properties = {
 }
 
 
+# default values
+field_defaults = {
+    'required': False,
+}
+
+
 # Schema field types related to
 # http://plone.org/products/dexterity/documentation/manual/developer-manual/reference/fields
 #
