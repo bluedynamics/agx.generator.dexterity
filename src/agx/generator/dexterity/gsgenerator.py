@@ -2,7 +2,11 @@ from node.ext.directory import Directory
 from node.ext.template import DTMLTemplate
 from node.ext.uml.utils import TaggedValues
 from agx.core import handler
-from agx.core.util import read_target_node
+from agx.core.util import (
+    read_target_node,
+    dotted_path,
+)
+
 from agx.generator.pyegg.utils import (
     egg_source,
     class_base_name,
@@ -10,6 +14,7 @@ from agx.generator.pyegg.utils import (
 )
 from agx.generator.dexterity.schema import standard_behaviors
 from agx.generator.dexterity.utils import type_id
+from agx.generator.dexterity.dxgenerator import getschemaclass
 
 
 @handler('gsprofiletypes', 'uml2fs', 'connectorgenerator',
@@ -61,7 +66,7 @@ def gsprofiletypes(self, source, target):
     # XXX: calculate from model
     
     content_icon = '++resource++%s/%s_icon.png' % (
-        egg.name, source.name[1:].lower())
+        egg.name, source.name.lower())
     
     type.params['ctype'] = dict()
     
@@ -71,8 +76,8 @@ def gsprofiletypes(self, source, target):
     type.params['ctype']['i18n_domain'] = egg.name
     
     # basic metadata
-    type.params['ctype']['title'] = source.name[1:]
-    type.params['ctype']['description'] = source.name[1:]
+    type.params['ctype']['title'] = source.name
+    type.params['ctype']['description'] = source.name
     type.params['ctype']['content_icon'] = content_icon
     type.params['ctype']['allow_discussion'] = 'False'
     type.params['ctype']['global_allow'] = 'True'
@@ -82,10 +87,12 @@ def gsprofiletypes(self, source, target):
     
     # dexterity specific
     class_ = read_target_node(source, target.target)
-    schema = '%s.%s' % (class_base_name(class_), class_.classname)
+    schemaclass=getschemaclass(source,target)
+    schema = '%s.%s' % (class_base_name(class_), schemaclass.classname)
     
     # XXX: check whether container or leaf
     klass = 'plone.dexterity.content.Item'
+    klass='%s.%s' % (class_base_name(class_), class_.classname)
     
     type.params['ctype']['schema'] = schema
     type.params['ctype']['klass'] = klass
@@ -143,6 +150,7 @@ def gsprofiletypes(self, source, target):
 def gscomposition(self, source, target):
     # get container. ownedEnds len should always be 1
     container = source.ownedEnds[0].type
+    class_=read_target_node(source,target.target)
     
     # lookup child from memberEnds
     child = None
@@ -171,7 +179,8 @@ def gscomposition(self, source, target):
     name = '%s.xml' % container_name
     fti = default['types'][name]
     fti.params['ctype']['allowed_content_types'].append(child_name)
-    fti.params['ctype']['klass'] = 'plone.dexterity.content.Container'
+    
+    #fti.params['ctype']['klass'] = 'plone.dexterity.content.Container'
 
 
 @handler('gsdynamicview', 'uml2fs', 'semanticsgenerator',

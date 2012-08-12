@@ -10,7 +10,7 @@
   
   <adapter
     for="agx.generator.dexterity.dxgenerator.IDexterityBehavior"
-    factory="agx.generator.dexterity.dxgenerator.DexterityModuleNameChooser"
+    factory="agx.generator.dexterity.dxgenerator.DexterityBehaviorModuleNameChooser"
   />
   
   <utility

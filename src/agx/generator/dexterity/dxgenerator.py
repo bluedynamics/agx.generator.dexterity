@@ -23,7 +23,10 @@ from agx.core import (
     handler,
     token,
 )
-from agx.core.util import read_target_node
+from agx.core.util import (
+    read_target_node,
+    dotted_path,
+)
 from agx.generator.pyegg.treesync import ModuleNameChooser
 from agx.generator.pyegg.utils import (
     set_copyright,
@@ -46,6 +49,11 @@ from agx.generator.dexterity.utils import type_id
 
 
 class DexterityModuleNameChooser(ModuleNameChooser):
+    
+    def __call__(self):
+        return self.context.name.lower()
+
+class DexterityBehaviorModuleNameChooser(ModuleNameChooser):
     
     def __call__(self):
         return self.context.name[1:].lower()
@@ -160,6 +168,9 @@ def lookup_field_def(source, group):
 def transform_attribute(source, target, group, fetch_tgv):
     field_def = lookup_field_def(source, group)
     attribute = read_target_node(source, target.target)
+    if not attribute: #attribute has been removed
+        return
+
     attribute.value = field_def['factory']
     tgv = TaggedValues(source)
     fetch_tgv(tgv, attribute, field_def['stereotype'])
@@ -208,10 +219,87 @@ def dxobject(self, source, target):
 # type related
 ###############################################################################
 
+def getschemaclass(source,target):
+    klass=read_target_node(source, target.target)
+    module=klass.parent
+    schemaclassname='I'+klass.classname
+    found=module.classes(schemaclassname)
+    return found[0]
 
+@handler('createschemaclass', 'uml2fs', 'zcagenerator', 'contenttype', order=99)
+def createschemaclass(self, source, target):
+    '''create the schema interface class on the fly'''
+    klass=read_target_node(source, target.target)
+    module=klass.parent
+    schemaclassname='I'+klass.classname
+    found=module.classes(schemaclassname)
+    if found:
+        schemaclass=found[0]
+    else:
+        schemaclass=python.Class(classname=schemaclassname)
+        schemaclass.__name__=schemaclass.uuid
+        module.insertbefore(schemaclass,klass)
+        
+    #transfer the attributes into the schema class
+    for att in klass.attributes():
+        if att.value == 'None': #move only schema attributes
+            klass.detach(att.__name__)
+            if not schemaclass.attributes(att.targets[0]):
+                schemaclass.insertlast(att)
+            else:
+                del att
+            
+@handler('grokforcontentclass', 'uml2fs', 'zcagenerator', 'contenttype', order=110)
+def grokforcontentclass(self, source, target):
+    '''create the schema interface class on the fly'''
+    klass=read_target_node(source, target.target)
+    module=klass.parent
+    schemaclassname='I'+klass.classname
+
+    context = "grok.implements(%s)" % schemaclassname
+    require = "grok.name('%s')" % dotted_path(source)
+    
+    context_exists = False
+    require_exists = False
+    
+    for block in klass.blocks():
+        for line in block.lines:
+            if line == context:
+                context_exists = True
+            if line == require:
+                require_exists = True
+    
+    block = python.Block()
+    block.__name__ = str(uuid.uuid4())
+    
+    if not context_exists:
+        block.lines.append(context)
+    if not require_exists:
+        block.lines.append(require)
+    
+    if block.lines:
+        klass.insertfirst(block)
+
+@handler('dxcomposition', 'uml2fs', 'zcasemanticsgenerator',
+         'association', order=100)
+def dxcomposition(self, source, target):
+    # get container. ownedEnds len should always be 1
+    container = source.ownedEnds[0].type
+    klass=read_target_node(container, target.target)
+    klass.bases=['dexterity.Container']
+
+@handler('dxitem', 'uml2fs', 'zcasemanticsgenerator', 'contenttype', order=99)
+def dxitem(self, source, target):
+#    import pdb;pdb.set_trace()
+    schema = getschemaclass(source,target)
+    klass = read_target_node(source, target.target)
+    module = schema.parent
+    klass.bases=['dexterity.Item']
+    
 @handler('typeview', 'uml2fs', 'zcagenerator', 'contenttype', order=100)
 def typeview(self, source, target):
-    schema = read_target_node(source, target.target)
+    schema = getschemaclass(source,target)
+    klass=read_target_node(source, target.target)
     module = schema.parent
     
     if IModule.providedBy(module):
@@ -229,7 +317,7 @@ def typeview(self, source, target):
     # include grok:grok directive if not set yet
     set_zcml_directive(directory, 'configure.zcml', 'grok:grok', 'package', '.')
     
-    classname = '%sView' % schema.classname[1:]
+    classname = '%sView' % klass.classname
     if module.classes(classname):
         view = module.classes(classname)[0]
     else:
@@ -276,7 +364,7 @@ def typeview(self, source, target):
         view[str(uuid.uuid4())] = template
     
     template.value = "PageTemplate('templates/%s.pt')" \
-        % schema.classname[1:].lower()
+        % klass.classname.lower()
     
     imp = Imports(module)
     imp.set('plone.directives', [['dexterity', None]])
@@ -284,7 +372,7 @@ def typeview(self, source, target):
     imp.set('grokcore.view.components', [['PageTemplate', None]])
     
     directory = module.parent
-    template_name = '%s.pt' % schema.classname[1:].lower()
+    template_name = '%s.pt' % klass.classname.lower()
     template = 'templates/%s' % template_name
     if not 'templates' in directory:
         directory['templates'] = Directory()
@@ -306,7 +394,7 @@ def typeicon(self, source, target):
     egg = egg_source(source)
     package = read_target_node(egg, target.target)
     resources = package['resources']
-    icon = '%s_icon.png' % source.name[1:].lower()
+    icon = '%s_icon.png' % source.name.lower()
     if not icon in resources:
         default = package['profiles']['default']
         type_name = type_id(source, target.target)
@@ -333,16 +421,18 @@ class IDexterityType(IClass):
 def schemaumlclass(self, source, target):
     class_ = read_target_node(source, target.target)
     if class_.stereotype('plone:content_type'):
-        class_.__name__ = 'I%s' % class_.name
+#        class_.__name__ = 'I%s' % class_.name
         alsoProvides(class_, IDexterityType)
+
 
 
 @handler('schemaclass', 'uml2fs', 'zcagenerator', 'contenttype', order=110)
 def schemaclass(self, source, target):
-    schema = read_target_node(source, target.target)
+    schema = getschemaclass(source,target)
+    klass = read_target_node(source, target.target)
     module = schema.parent
     
-    view = module.classes('%sView' % schema.classname[1:])[0]
+    view = module.classes('%sView' % klass.classname)[0]
     tok = token(str(view.uuid), True, depends_on=set())
     tok.depends_on.add(schema)
     
@@ -359,7 +449,7 @@ def schemaclass(self, source, target):
 @handler('typemodulesorter', 'uml2fs', 'zcasemanticsgenerator', 
          'contenttype', order=100)
 def dependencysorter(self, source, target):
-    schema = read_target_node(source, target.target)
+    schema = getschemaclass(source,target)
     module = schema.parent
     sort_classes_in_module(module)
 
