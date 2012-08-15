@@ -325,6 +325,7 @@ def dxcomposition(self, source, target):
     # get container. ownedEnds len should always be 1
     container = source.ownedEnds[0].type
     klass=read_target_node(container, target.target)
+    token(str(klass.uuid),True,folderish=True)
     klass.bases=['dexterity.Container']
 
 @handler('dxitem', 'uml2fs', 'zcasemanticsgenerator', 'contenttype', order=99)
@@ -433,13 +434,15 @@ def typeicon(self, source, target):
     package = read_target_node(egg, target.target)
     resources = package['resources']
     icon = '%s_icon.png' % source.name.lower()
+    klass=read_target_node(source,target.target)
+    folderish=token(str(klass.uuid),True,folderish=False).folderish
     if not icon in resources:
         default = package['profiles']['default']
         type_name = type_id(source, target.target)
         name = '%s.xml' % type_name
         
         fti = default['types'][name]
-        if fti.params['ctype']['klass'] == 'plone.dexterity.content.Container':
+        if folderish:
             path = templatepath('folder_icon.png')
         else:
             path = templatepath('document_icon.png')
