@@ -31,8 +31,11 @@ from agx.generator.pyegg.treesync import ModuleNameChooser
 from agx.generator.pyegg.utils import (
     set_copyright,
     sort_classes_in_module,
+    class_base_name,
+    class_full_name,
     egg_source,
 )
+
 from agx.generator.zca.utils import (
     zcml_include_package,
     set_zcml_namespace,
@@ -226,7 +229,8 @@ def getschemaclass(source,target):
     found=module.classes(schemaclassname)
     return found[0]
 
-@handler('createschemaclass', 'uml2fs', 'zcagenerator', 'contenttype', order=99)
+
+@handler('createschemaclass', 'uml2fs', 'connectorgenerator', 'contenttype', order=99)
 def createschemaclass(self, source, target):
     '''create the schema interface class on the fly'''
     klass=read_target_node(source, target.target)
@@ -240,6 +244,11 @@ def createschemaclass(self, source, target):
         schemaclass.__name__=schemaclass.uuid
         module.insertbefore(schemaclass,klass)
         
+        #expose it in __init__
+    imp = Imports(module.parent['__init__.py'])
+    imp.set(class_base_name(schemaclass), [[schemaclassname, None]])
+
+        
     #transfer the attributes into the schema class
     for att in klass.attributes():
         if att.value == 'None': #move only schema attributes
@@ -248,6 +257,34 @@ def createschemaclass(self, source, target):
                 schemaclass.insertlast(att)
             else:
                 del att
+                
+    #delete the content class if not needed
+    createit=TaggedValues(source).direct('create_contentclass', 'plone:content_type',False)
+    if not createit or klass.functions():
+        token(str(klass.uuid), True,dont_generate=True)
+
+@handler('purgecontentclasses', 'uml2fs', 'dxcleanupgenerator', 'contenttype', order=160)
+def purgecontentclasses(self, source, target):
+    '''remove the content classes that should not be generated'''
+    klass=read_target_node(source, target.target)
+    module=klass.parent
+    if token(str(klass.uuid), False,dont_generate=False).dont_generate:
+        module.detach(klass.__name__)
+        
+        #remove the imports
+        init=module.parent['__init__.py']
+        imps=init.imports()
+        impname=[klass.classname,None]
+        for imp in imps:
+            if impname in imp.names:
+                if len(imp.names)>1:
+                    #if more names are in the imp delete the name
+                    imp.names=[n for n in imp.names if n != impname]
+                else:
+                    #delete the whole import
+                    init.detach(imp.__name__)
+
+        
             
 @handler('grokforcontentclass', 'uml2fs', 'zcagenerator', 'contenttype', order=110)
 def grokforcontentclass(self, source, target):
@@ -259,6 +296,7 @@ def grokforcontentclass(self, source, target):
     context = "grok.implements(%s)" % schemaclassname
     require = "grok.name('%s')" % dotted_path(source)
     
+#    import pdb;pdb.set_trace()
     context_exists = False
     require_exists = False
     
@@ -271,6 +309,7 @@ def grokforcontentclass(self, source, target):
     
     block = python.Block()
     block.__name__ = str(uuid.uuid4())
+    
     
     if not context_exists:
         block.lines.append(context)
@@ -301,7 +340,6 @@ def typeview(self, source, target):
     schema = getschemaclass(source,target)
     klass=read_target_node(source, target.target)
     module = schema.parent
-    
     if IModule.providedBy(module):
         directory=module.parent
     else:
@@ -431,6 +469,7 @@ def schemaclass(self, source, target):
     schema = getschemaclass(source,target)
     klass = read_target_node(source, target.target)
     module = schema.parent
+    print 'schemaclass:',schema.classname
     
     view = module.classes('%sView' % klass.classname)[0]
     tok = token(str(view.uuid), True, depends_on=set())

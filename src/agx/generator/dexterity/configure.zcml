@@ -19,4 +19,11 @@
 	component=".profiles.ProfileLocation"
   />
 
+  <agx:generator
+    name="dxcleanupgenerator"
+    transform="uml2fs"
+    depends="plonegenerator"
+    description="doing cleanup."
+  />
+
 </configure>

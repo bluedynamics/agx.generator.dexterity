@@ -1,7 +1,10 @@
 from node.ext.directory import Directory
 from node.ext.template import DTMLTemplate
 from node.ext.uml.utils import TaggedValues
-from agx.core import handler
+from agx.core import (
+    handler,
+    token
+)
 from agx.core.util import (
     read_target_node,
     dotted_path,
@@ -91,8 +94,10 @@ def gsprofiletypes(self, source, target):
     schema = '%s.%s' % (class_base_name(class_), schemaclass.classname)
     
     # XXX: check whether container or leaf
-    klass = 'plone.dexterity.content.Item'
-    klass='%s.%s' % (class_base_name(class_), class_.classname)
+    if token(str(class_.uuid), False,dont_generate=False).dont_generate:
+        klass = 'plone.dexterity.content.Item'
+    else:
+        klass='%s.%s' % (class_base_name(class_), class_.classname)
     
     type.params['ctype']['schema'] = schema
     type.params['ctype']['klass'] = klass
@@ -150,7 +155,7 @@ def gsprofiletypes(self, source, target):
 def gscomposition(self, source, target):
     # get container. ownedEnds len should always be 1
     container = source.ownedEnds[0].type
-    class_=read_target_node(source,target.target)
+    class_=read_target_node(container,target.target)
     
     # lookup child from memberEnds
     child = None
@@ -179,8 +184,8 @@ def gscomposition(self, source, target):
     name = '%s.xml' % container_name
     fti = default['types'][name]
     fti.params['ctype']['allowed_content_types'].append(child_name)
-    
-    #fti.params['ctype']['klass'] = 'plone.dexterity.content.Container'
+    if token(str(class_.uuid), False,dont_generate=False).dont_generate: #otherwise the class name is already set
+        fti.params['ctype']['klass'] = 'plone.dexterity.content.Container'
 
 
 @handler('gsdynamicview', 'uml2fs', 'semanticsgenerator',
