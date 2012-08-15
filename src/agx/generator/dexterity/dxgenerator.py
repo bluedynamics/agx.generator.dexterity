@@ -244,10 +244,9 @@ def createschemaclass(self, source, target):
         schemaclass.__name__=schemaclass.uuid
         module.insertbefore(schemaclass,klass)
         
-        #expose it in __init__
+    #expose it in __init__
     imp = Imports(module.parent['__init__.py'])
     imp.set(class_base_name(schemaclass), [[schemaclassname, None]])
-
         
     #transfer the attributes into the schema class
     for att in klass.attributes():
@@ -326,7 +325,9 @@ def dxcomposition(self, source, target):
     container = source.ownedEnds[0].type
     klass=read_target_node(container, target.target)
     token(str(klass.uuid),True,folderish=True)
-    klass.bases=['dexterity.Container']
+    bases=[b for b in klass.bases if b != 'dexterity.Item']
+    if 'dexterity.Container' not in bases:
+        klass.bases=['dexterity.Container']+bases
 
 @handler('dxitem', 'uml2fs', 'zcasemanticsgenerator', 'contenttype', order=99)
 def dxitem(self, source, target):
@@ -334,7 +335,9 @@ def dxitem(self, source, target):
     schema = getschemaclass(source,target)
     klass = read_target_node(source, target.target)
     module = schema.parent
-    klass.bases=['dexterity.Item']
+    bases=[b for b in klass.bases if b != 'dexterity.Container']
+    if 'dexterity.Item' not in bases:
+        klass.bases=['dexterity.Item']+bases
     
 @handler('typeview', 'uml2fs', 'zcagenerator', 'contenttype', order=100)
 def typeview(self, source, target):
@@ -472,7 +475,6 @@ def schemaclass(self, source, target):
     schema = getschemaclass(source,target)
     klass = read_target_node(source, target.target)
     module = schema.parent
-    print 'schemaclass:',schema.classname
     
     view = module.classes('%sView' % klass.classname)[0]
     tok = token(str(view.uuid), True, depends_on=set())
