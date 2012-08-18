@@ -230,7 +230,7 @@ def getschemaclass(source,target):
     return found[0]
 
 
-@handler('createschemaclass', 'uml2fs', 'connectorgenerator', 'contenttype', order=99)
+@handler('createschemaclass', 'uml2fs', 'hierarchygenerator', 'contenttype', order=99)
 def createschemaclass(self, source, target):
     '''create the schema interface class on the fly'''
     klass=read_target_node(source, target.target)
@@ -259,7 +259,7 @@ def createschemaclass(self, source, target):
                 
     #delete the content class if not needed
     createit=TaggedValues(source).direct('create_contentclass', 'plone:content_type',False)
-    if not createit or klass.functions():
+    if not (createit or klass.functions()):
         token(str(klass.uuid), True,dont_generate=True)
 
 @handler('purgecontentclasses', 'uml2fs', 'dxcleanupgenerator', 'contenttype', order=160)
@@ -285,33 +285,29 @@ def purgecontentclasses(self, source, target):
 
         
             
-@handler('grokforcontentclass', 'uml2fs', 'zcagenerator', 'contenttype', order=110)
+@handler('grokforcontentclass', 'uml2fs', 'connectorgenerator', 'contenttype', order=110)
 def grokforcontentclass(self, source, target):
     '''create the schema interface class on the fly'''
     klass=read_target_node(source, target.target)
     module=klass.parent
     schemaclassname='I'+klass.classname
 
-    context = "grok.implements(%s)" % schemaclassname
+    #add the schemaclass to realizes, the rest is done by the
+    # zcagenerator::zcarealize_finalize handler
+    impltok = token(str(klass.uuid), True, realizes=[], provides=None)
+    impltok.realizes.insert(0,{'name':schemaclassname})
+
     require = "grok.name('%s')" % dotted_path(source)
-    
-#    import pdb;pdb.set_trace()
-    context_exists = False
     require_exists = False
     
     for block in klass.blocks():
         for line in block.lines:
-            if line == context:
-                context_exists = True
             if line == require:
                 require_exists = True
     
     block = python.Block()
     block.__name__ = str(uuid.uuid4())
     
-    
-    if not context_exists:
-        block.lines.append(context)
     if not require_exists:
         block.lines.append(require)
     
