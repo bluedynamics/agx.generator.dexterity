@@ -248,19 +248,32 @@ def createschemaclass(self, source, target):
     imp = Imports(module.parent['__init__.py'])
     imp.set(class_base_name(schemaclass), [[schemaclassname, None]])
         
+    #mark the content class for deletion if not needed
+    createit=TaggedValues(source).direct('create_contentclass', 'plone:content_type',False)
+    if not (createit or klass.functions()):
+        token(str(klass.uuid), True,dont_generate=True)
+
+@handler('schemaclass_move_attribs', 'uml2fs', 'dxcleanupgenerator', 'contenttype', order=99)
+def schemaclass_move_attribs(self, source, target):
+    '''move the content class attribute to the schema class'''
+    klass=read_target_node(source, target.target)
+    module=klass.parent
+    schemaclassname='I'+klass.classname
+    found=module.classes(schemaclassname)
+    if found:
+        schemaclass=found[0]
+    else:
+        return
+        
     #transfer the attributes into the schema class
     for att in klass.attributes():
-        if att.value == 'None': #move only schema attributes
+        if att.value == 'None' or att.value.startswith('schema.'): #move only schema attributes
             klass.detach(att.__name__)
             if not schemaclass.attributes(att.targets[0]):
                 schemaclass.insertlast(att)
             else:
                 del att
                 
-    #delete the content class if not needed
-    createit=TaggedValues(source).direct('create_contentclass', 'plone:content_type',False)
-    if not (createit or klass.functions()):
-        token(str(klass.uuid), True,dont_generate=True)
 
 @handler('purgecontentclasses', 'uml2fs', 'dxcleanupgenerator', 'contenttype', order=160)
 def purgecontentclasses(self, source, target):
