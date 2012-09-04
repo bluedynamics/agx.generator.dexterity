@@ -332,11 +332,12 @@ def grokforcontentclass(self, source, target):
 def dxcomposition(self, source, target):
     # get container. ownedEnds len should always be 1
     container = source.ownedEnds[0].type
-    klass=read_target_node(container, target.target)
-    token(str(klass.uuid),True,folderish=True)
-    bases=[b for b in klass.bases if b != 'dexterity.Item']
-    if 'dexterity.Container' not in bases:
-        klass.bases=['dexterity.Container']+bases
+    if container.stereotype('plone:content_type'):
+        klass=read_target_node(container, target.target)
+        token(str(klass.uuid),True,folderish=True)
+        bases=[b for b in klass.bases if b != 'dexterity.Item']
+        if 'dexterity.Container' not in bases:
+            klass.bases=['dexterity.Container']+bases
 
 @handler('dxitem', 'uml2fs', 'zcasemanticsgenerator', 'contenttype', order=99)
 def dxitem(self, source, target):
