@@ -330,7 +330,7 @@ def grokforcontentclass(self, source, target):
 @handler('dxcomposition', 'uml2fs', 'zcasemanticsgenerator',
          'association', order=100)
 def dxcomposition(self, source, target):
-    # get container. ownedEnds len should always be 1
+    # get container. ownedEnds len should always be 2
     container = source.ownedEnds[0].type
     if container.stereotype('plone:content_type'):
         klass=read_target_node(container, target.target)
