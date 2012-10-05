@@ -510,6 +510,9 @@ def dependencysorter(self, source, target):
 
 @handler('dxpackagedependencies', 'uml2fs', 'semanticsgenerator', 'pythonegg')
 def dxpackagedependencies(self, source, target):
+    # check whether dexterity profile exists in model, otherwise skip.
+    if not source.root.get('dexterity'):
+        return
     setup = target.target['setup.py']
     setup.params['setup_dependencies'].append('plone.app.dexterity')
 
