@@ -39,6 +39,8 @@ setup(name="agx.generator.dexterity",
       ),
       entry_points="""
       ##code-section entry_points
+      [agx.generator]
+      register = agx.generator.dexterity:register
       ##/code-section entry_points
       """,
       ##code-section additionals
