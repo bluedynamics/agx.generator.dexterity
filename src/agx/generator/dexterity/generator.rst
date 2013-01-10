@@ -41,4 +41,4 @@ Setup configuration and emulate main routine::
     >>> controller = agx.core.Controller()
     >>> target = controller(modelpaths, outdir)
     >>> target
-    <Directory object '/.../agx.generator.dexterity/src/agx/generator/dexterity/tests/data/agx.generator.dexterity-sample' at ...>
+    <Directory object '/.../agx.generator.dexterity/src/agx/generator/dexterity/testing/data/agx.generator.dexterity-sample' at ...>

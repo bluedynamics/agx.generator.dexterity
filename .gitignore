@@ -1,4 +1,4 @@
 src/agx.generator.dexterity.egg-info/
 *.pyc
 *.pyo
-src/agx/generator/dexterity/tests/data/agx.generator.dexterity-sample/
+src/agx/generator/dexterity/testing/data/agx.generator.dexterity-sample/
