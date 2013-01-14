@@ -72,7 +72,7 @@ class ObjectScope(Scope):
 
 
 class BehaviorScope(Scope):
-    
+
     def __call__(self, node):
         return node.stereotype('dexterity:behavior')
 

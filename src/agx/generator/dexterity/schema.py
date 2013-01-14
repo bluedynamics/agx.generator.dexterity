@@ -50,28 +50,28 @@ field_properties = {
     'readonly': 'bool',
     'default': 'raw',
     'missing_value': 'raw',
-    
+
     # zope.schema.interfaces.IMinMaxLen
     'min_length': 'int',
     'max_length': 'int',
-    
+
     # zope.schema.interfaces.ICollection
     'value_type': 'raw',
     'unique': 'bool',
-    
+
     # zope.schema.interfaces.IDict
     'key_type': 'raw',
     'value_type': 'raw',
-    
+
     # plone.app.textfield.interfaces.IRichText
     'default_mime_type': 'string',
     'output_mime_type': 'string',
     'allowed_mime_types': 'raw',
-    
+
     # zope.schema.interfaces.IMinMax
     'min': 'raw',
     'max': 'raw',
-    
+
     # zope.schema.interfaces.IObject
     'schema': 'string',
 }
@@ -114,7 +114,7 @@ field_types = {
             'factory': 'schema.FrozenSet',
         },
     },
-    
+
     # zope.schema.interfaces.IMinMaxLen related fields
     'minmaxlen': {
         'dexterity:SourceText': {
@@ -151,14 +151,14 @@ field_types = {
             'factory': 'schema.Password',
         },
     },
-    
+
     # zope.schema.interfaces.IDict related fields
     'dict': {
         'dexterity:Dict': {
             'factory': 'schema.Dict',
         },
     },
-    
+
     # zope.schema.interfaces.IField related fields
     'field': {
         'dexterity:Bool': {
@@ -198,7 +198,7 @@ field_types = {
             'depends': 'plone.namedfile',
         },
     },
-    
+
     # plone.app.textfield.interfaces.IRichText related fields
     'richtext': {
         'dexterity:RichText': {
@@ -208,7 +208,7 @@ field_types = {
             'depends': 'plone.app.textfield',
         },
     },
-    
+
     # zope.schema.interfaces.IMinMax related fields
     'minmax': {
         'dexterity:Int': {
@@ -230,7 +230,7 @@ field_types = {
             'factory': 'schema.Decimal',
         },
     },
-    
+
     # zope.schema.interfaces.IObject related fields
     'object': {
         'dexterity:Object': {
