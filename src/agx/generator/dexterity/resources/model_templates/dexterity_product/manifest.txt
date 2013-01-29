@@ -6,5 +6,5 @@ files=model.di;\
     model.uml.agx;\
 
 title=Dexterity Product
-description=A vanilla Plone Dexterity model that containing the necessary \
+description=A vanilla Plone Dexterity model that containing the necessary
     settings for content stuff for Plone
