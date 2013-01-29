@@ -6,4 +6,6 @@ files=model.di;\
     model.uml.agx;\
 
 title=Dexterity Example
-description=A ready-to-run Plone Dexterity example that demonstrates how to model content stuff for Plone
+description=A ready-to-run Plone Dexterity example that demonstrates\
+    how to model content stuff for Plone.\
+    contains a set of example classes
