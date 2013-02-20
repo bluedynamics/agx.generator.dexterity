@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_OeNdMEy8EeGV5f8-MtNCTQ" type="PapyrusUMLProfileDiagram" name="ProfileDiagram" measurementUnit="Pixel">
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_OeNdMEy8EeGV5f8-MtNCTQ" type="PapyrusUMLProfileDiagram" name="ProfileDiagram" measurementUnit="Pixel">
   <children xmi:type="notation:Shape" xmi:id="_Xd4G4Ey8EeGV5f8-MtNCTQ" type="1031" fontName="Ubuntu" fontHeight="10" lineColor="0">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Xd4t8Ey8EeGV5f8-MtNCTQ" source="ShadowFigure">
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Xd4t8Uy8EeGV5f8-MtNCTQ" key="ShadowFigure_Value" value="false"/>
@@ -11,11 +11,11 @@
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Xd4t9Uy8EeGV5f8-MtNCTQ" key="QualifiedNameDepth" value="1000"/>
     </eAnnotations>
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Xd5VAEy8EeGV5f8-MtNCTQ" source="Stereotype_Annotation">
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Xd5VAUy8EeGV5f8-MtNCTQ" key="StereotypeWithQualifiedNameList" value=""/>
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Xd5VAky8EeGV5f8-MtNCTQ" key="StereotypeList" value="Standard::Metaclass"/>
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Xd5VA0y8EeGV5f8-MtNCTQ" key="Stereotype_Presentation_Kind" value="HorizontalStereo"/>
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Xd5VBEy8EeGV5f8-MtNCTQ" key="PropStereoDisplay" value=""/>
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Xd5VBUy8EeGV5f8-MtNCTQ" key="StereotypePropertyLocation" value="Compartment"/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_rxiPUHtiEeKfMvxpliE4xA" key="StereotypeWithQualifiedNameList" value=""/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_rxiPUXtiEeKfMvxpliE4xA" key="StereotypeList" value=""/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_rxiPUntiEeKfMvxpliE4xA" key="Stereotype_Presentation_Kind" value="HorizontalStereo"/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_rxiPU3tiEeKfMvxpliE4xA" key="PropStereoDisplay" value=""/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_rxiPVHtiEeKfMvxpliE4xA" key="StereotypePropertyLocation" value="Compartment"/>
     </eAnnotations>
     <children xmi:type="notation:DecorationNode" xmi:id="_Xd4t9ky8EeGV5f8-MtNCTQ" type="1084"/>
     <element xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
@@ -125,11 +125,11 @@
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_lpYrclIvEeGBGZV02kqH5A" key="QualifiedNameDepth" value="1000"/>
     </eAnnotations>
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_lpZSgFIvEeGBGZV02kqH5A" source="Stereotype_Annotation">
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_lpZSgVIvEeGBGZV02kqH5A" key="StereotypeWithQualifiedNameList" value=""/>
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_lpZSglIvEeGBGZV02kqH5A" key="StereotypeList" value="Standard::Metaclass"/>
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_lpZSg1IvEeGBGZV02kqH5A" key="Stereotype_Presentation_Kind" value="HorizontalStereo"/>
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_lpZShFIvEeGBGZV02kqH5A" key="PropStereoDisplay" value=""/>
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_lpZShVIvEeGBGZV02kqH5A" key="StereotypePropertyLocation" value="Compartment"/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_rxsAUHtiEeKfMvxpliE4xA" key="StereotypeWithQualifiedNameList" value=""/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_rxsAUXtiEeKfMvxpliE4xA" key="StereotypeList" value=""/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_rxsAUntiEeKfMvxpliE4xA" key="Stereotype_Presentation_Kind" value="HorizontalStereo"/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_rxsAU3tiEeKfMvxpliE4xA" key="PropStereoDisplay" value=""/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_rxsAVHtiEeKfMvxpliE4xA" key="StereotypePropertyLocation" value="Compartment"/>
     </eAnnotations>
     <children xmi:type="notation:DecorationNode" xmi:id="_lpYrc1IvEeGBGZV02kqH5A" type="1084"/>
     <element xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
@@ -1202,11 +1202,11 @@
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_dTNLFVi7EeG4Z-w98Q2zpg" key="QualifiedNameDepth" value="1000"/>
     </eAnnotations>
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_dTNyIFi7EeG4Z-w98Q2zpg" source="Stereotype_Annotation">
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_dTNyIVi7EeG4Z-w98Q2zpg" key="StereotypeWithQualifiedNameList" value=""/>
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_dTNyIli7EeG4Z-w98Q2zpg" key="StereotypeList" value="Standard::Metaclass"/>
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_dTNyI1i7EeG4Z-w98Q2zpg" key="Stereotype_Presentation_Kind" value="HorizontalStereo"/>
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_dTNyJFi7EeG4Z-w98Q2zpg" key="PropStereoDisplay" value=""/>
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_dTNyJVi7EeG4Z-w98Q2zpg" key="StereotypePropertyLocation" value="Compartment"/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_rx2_cHtiEeKfMvxpliE4xA" key="StereotypeWithQualifiedNameList" value=""/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_rx2_cXtiEeKfMvxpliE4xA" key="StereotypeList" value=""/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_rx2_cntiEeKfMvxpliE4xA" key="Stereotype_Presentation_Kind" value="HorizontalStereo"/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_rx2_c3tiEeKfMvxpliE4xA" key="PropStereoDisplay" value=""/>
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_rx2_dHtiEeKfMvxpliE4xA" key="StereotypePropertyLocation" value="Compartment"/>
     </eAnnotations>
     <children xmi:type="notation:DecorationNode" xmi:id="_dTNLFli7EeG4Z-w98Q2zpg" type="1084"/>
     <element xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Dependency"/>
