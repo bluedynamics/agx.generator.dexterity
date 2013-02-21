@@ -178,4 +178,5 @@
   <dexterity:behavior_dublincore xmi:id="_XyAVYFx2EeG1f-Kr3Cp4uw" base_Class="_hWlrgFi8EeG4Z-w98Q2zpg"/>
   <dexterity:behavior_dublincore xmi:id="_Yt_cgFx2EeG1f-Kr3Cp4uw" base_Class="_Mb_2kFueEeGtD5GMZ61r8A"/>
   <dexterity:behavior_dublincore xmi:id="_ZlIf4Fx2EeG1f-Kr3Cp4uw" base_Class="_Jm2VUFJREeGZSeytnTlRxw"/>
+  <plone:dynamic_view xmi:id="_vm1KAHwfEeKe8LZCjUxbGQ" base_Class="_MrJcoFgLEeGNG5unf8Szeg" name="person_dynamic_view" template_name="person_dynamic_view.pt"/>
 </xmi:XMI>
