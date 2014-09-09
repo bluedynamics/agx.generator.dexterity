@@ -271,7 +271,16 @@ def schemaclass_move_attribs(self, source, target):
     # transfer the attributes into the schema class
     for att in klass.attributes():
         # move only schema attributes
-        if att.value == 'None' or att.value.startswith('schema.'):
+        # we will decide this heuristically by checking if the properties stereotype is 'dexterity'
+        # XXX: check if this is sufficient
+        isschema=False
+        try:
+            prop=source[att.targets[0]]
+            isschema = 'dexterity'  in [ ss.profile.name for ss in prop.stereotypes]
+        except:
+            print 'error checking for stereotype dexterity in att %s' % att.value
+            
+        if isschema or att.value == 'None' or att.value.startswith('schema.'):
             klass.detach(att.__name__)
             if not schemaclass.attributes(att.targets[0]):
                 schemaclass.insertlast(att)
