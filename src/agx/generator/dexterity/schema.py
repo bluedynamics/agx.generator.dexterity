@@ -20,7 +20,7 @@ standard_behaviors = {
     'dexterity:behavior_namefromtitle':
         'plone.app.content.interfaces.INameFromTitle',
     'dexterity:behavior_relateditems':
-        'plone.app.dexterity.behaviors.metadata.IRelatedItems',
+        'plone.app.relationfield.behavior.IRelatedItems',
 }
 
 
